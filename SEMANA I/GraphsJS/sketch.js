@@ -31,7 +31,13 @@ function setup(){
       //otherNode.edges.push(movieNode); //Es un doblemente dirigido, no recuerdo si asi era el nombre jajajaj
     }
   }
+
   bfs("A","H");
+  for(var i = 0; i < graph.nodes.length; i++)
+      graph.nodes[i].searched = false;
+
+  dfs("A","H");
+
 }
 
 function bfs(s,e){
@@ -67,6 +73,34 @@ function bfs(s,e){
       }
   }
 
+  /*for(var p = path.length - 1; p >= 0; p--)
+    console.log(path[p].value);*/
+}
+
+function dfs(s,e){
+  graph.start = s;
+  graph.end = e;
+  var path = []; //El camino final
+  var current;
+  current = graph.getNode(graph.start);
+  current.searched = true; //Marcar como visitado
+  if(current.value === graph.end){ //Si ya llego al destino
+    path.push(current);
+    var next = current.parent;
+    while(next){
+      path.push(next);
+      next = next.parent;
+    }
+  }
+  else{
+    for(var i = 0; i < current.edges.length; i++){
+      if(!current.edges[i].searched){
+        dfs(current.edges[i].value,e);
+      }
+    }
+  }
+
   for(var p = path.length - 1; p >= 0; p--)
     console.log(path[p].value);
+
 }
