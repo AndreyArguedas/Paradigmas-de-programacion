@@ -1,0 +1,7 @@
+un tema de dominio: SUDOKU (inclue un reporte escrito)
+un tema de cliente y eventual framework (Ng4)
+un tema de server (mundo Node)
+un tema de framework de web (Express, Rest)
+un tema de Nosql Mongo con ORM
+un tema de trabajo cooperativo y maneo de versiones, construcción y corrida
+varios temas opcionales para puntos extra

@@ -5,7 +5,7 @@ function rec(n){
 	return((n%2==0)?rec(n-1)+3:rec(n-1)-1);
 }
 
-/* 2^n recursivo */	
+/* 2^n recursivo */
 function g(n){
 	if(n<=1)return n;
 	return g(n-1)+g(n-1);
@@ -15,7 +15,7 @@ function g(n){
 
 function recursiveBinarySearch(a,element){
 	if(a.length > 0){
-		var half = Math.ceil(a.length / 2);
+		var half = Math.floor(a.length / 2);
 		if(a[half] === element)
 			return half;
 		else{
@@ -30,8 +30,11 @@ function recursiveBinarySearch(a,element){
 
 function testrbs(){
 	var a = [4,8,15,19,25];
+	console.log(recursiveBinarySearch(a,4));
+	console.log(recursiveBinarySearch(a,8));
 	console.log(recursiveBinarySearch(a,19));
 	console.log(recursiveBinarySearch(a,15));
+	console.log(recursiveBinarySearch(a,25));
 	console.log(recursiveBinarySearch(a,3));
 }
 
@@ -67,7 +70,7 @@ function printBinary(n,str){
 	else{
 		str = n % 2 + str;
 		printBinary(Math.floor(n / 2),str);
-	}	
+	}
 }
 
 function voltear(n){
