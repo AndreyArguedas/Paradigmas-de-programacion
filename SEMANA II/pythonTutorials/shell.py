@@ -29,3 +29,16 @@ def goo() :
     return
 
 # Un return vacio retorna un None, similar a undefined de JS
+
+# Imperativo
+
+def vabs(x) :
+	if x == 0 :
+		return 0
+	elif x > 0 :
+		return x
+	else :
+		return - x
+
+def vabsf(x) :
+	return x if x >= 0 else -x
