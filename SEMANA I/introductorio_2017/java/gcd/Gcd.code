@@ -1,0 +1,105 @@
+Compiled from "Gcd.java"
+public class Gcd {
+  public Gcd();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+    LineNumberTable:
+      line 1: 0
+
+  static int gcd(int, int);
+    Code:
+       0: iload_0
+       1: ifne          6
+       4: iload_1
+       5: ireturn
+       6: iload_1
+       7: ifne          12
+      10: iload_0
+      11: ireturn
+      12: iload_0
+      13: iload_1
+      14: if_icmpeq     36
+      17: iload_0
+      18: iload_1
+      19: if_icmple     29
+      22: iload_0
+      23: iload_1
+      24: isub
+      25: istore_0
+      26: goto          12
+      29: iload_1
+      30: iload_0
+      31: isub
+      32: istore_1
+      33: goto          12
+      36: iload_0
+      37: ireturn
+    
+	LineNumberTable:
+      line 4: 0
+      line 5: 6
+      line 6: 12
+      line 7: 17
+      line 8: 22
+      line 9: 29
+      line 11: 36
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: iconst_0
+       1: istore_1
+       2: iconst_0
+       3: istore_2
+       4: aload_0
+       5: arraylength
+       6: iconst_1
+       7: if_icmplt     17
+      10: aload_0
+      11: iconst_0
+      12: aaload
+      13: invokestatic  #2                  // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+      16: istore_1
+      17: aload_0
+      18: arraylength
+      19: iconst_2
+      20: if_icmplt     30
+      23: aload_0
+      24: iconst_1
+      25: aaload
+      26: invokestatic  #2                  // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+      29: istore_2
+      30: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      33: ldc           #4                  // String gcd(%d, %d)= %d\n
+      35: iconst_3
+      36: anewarray     #5                  // class java/lang/Object
+      39: dup
+      40: iconst_0
+      41: iload_1
+      42: invokestatic  #6                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      45: aastore
+      46: dup
+      47: iconst_1
+      48: iload_2
+      49: invokestatic  #6                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      52: aastore
+      53: dup
+      54: iconst_2
+      55: iload_1
+      56: iload_2
+      57: invokestatic  #7                  // Method gcd:(II)I
+      60: invokestatic  #6                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      63: aastore
+      64: invokevirtual #8                  // Method java/io/PrintStream.printf:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+      67: pop
+      68: return
+    LineNumberTable:
+      line 14: 0
+      line 15: 4
+      line 16: 10
+      line 18: 17
+      line 19: 23
+      line 21: 30
+      line 22: 68
+}
