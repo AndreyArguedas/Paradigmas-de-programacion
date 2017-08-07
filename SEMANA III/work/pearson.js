@@ -1,14 +1,16 @@
 
 function pearson(x, y){
 	var quant = (a, b) => a.length + b.length;
-	var desv = (a) => sumPow(a) / a.length;
+	var desv = (a) => sumPow(a,1) / a.length;
 	var n = quant(x, y);
-	var sumx = sumPow(x);
-	var sumy = sumPow(y);
+	var sumx = sumPow(x,1);
+	var sumy = sumPow(y,1);
 	var sum2 = sumxy(x, y);
 	var sumPowx = sumPow(x,2);
 	var sumPowy = sumPow(y,2);
-	return (sum2 -  n * sumx * sumy) / (Math.sqrt((sumPowx - n * Math.pow(desv(x),2))) * Math.sqrt((sumPowy - n * Math.pow(desv(y),2)))) ;
+	var num = sum2 - (n * (sumx / n) * (sumy / n));
+	var den = Math.sqrt(sumPowx - Math.pow((sumx / n),2) * n) * Math.sqrt( sumPowy - Math.pow((sumy / n) , 2) * n);
+	return num / den ;
 }
 
 function sumxy(x, y){
@@ -16,7 +18,7 @@ function sumxy(x, y){
 }
 
 
-function sumPow(a, exp = 1){
+function sumPow(a, exp){
 	return a.reduce( (acc, curr) => acc + Math.pow(curr,exp), 0 );
 }
 
