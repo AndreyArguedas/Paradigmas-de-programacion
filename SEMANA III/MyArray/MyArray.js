@@ -16,25 +16,25 @@ class MyArray extends Array {
    }
    neuter(){
      if (this.length == 0) return;
-	 let c =  neuters[typeof this[0]]
-	 return c && c(this[0]);
+	   let c =  neuters[typeof this[0]]
+	   return c && c(this[0]);
    }
    reportError(name){
       throw new Error(`MyArray.${name} not implemented`)
    }
    reduce(f, z = neuter()){ // Implemente imperativo
-	    for(var i = 0; i < this.length; i++ )
+	    for(var i = 0; i < this.length; i++)
         z = f(z, this[i]);
       return z; 	   
    }
    reduceBreak(f, init = neuter(), brk){ // Implemente imperativo
-	    for(var i = 0; i < this.length; i++ )
-        if(!brk(this[i]))
+	    for(var i = 0; i < this.length; i++)
+        if( !brk(this[i]) )
           init = f(init,this[i]);
       return init;
    }
    map(f){ // Implemente usando MyArray.reduce
-	  this.reduce(f,0);
+	    this.reduce(f);
    }
    forEach(f){ // Implemente usando MyArray.reduce
 	  this.reportError('forEach')

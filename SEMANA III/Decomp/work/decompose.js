@@ -7,14 +7,19 @@
   
 */
 function decompose(n){
-	var s = 0, 
-	    d = n - 1;
-	while ( !(d % 2) ){
-		d >>= 1;
-		++s;
-	}
-	return {s:s, d:d}
+	return fun_decompose(n, 0, n - 1); 
 }
+
+function fun_decompose(n,s,d){
+	var dec = (n, s, d) => {return ((d % 2)) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1)};
+	return dec(n, s, d);
+}
+
+function def(n){
+	let s = 0;
+	let d = n - 1;
+}
+
 module.exports = {
    decompose
 }
