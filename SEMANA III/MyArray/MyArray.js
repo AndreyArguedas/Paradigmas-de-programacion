@@ -23,33 +23,36 @@ class MyArray extends Array {
       throw new Error(`MyArray.${name} not implemented`)
    }
    reduce(f, z = neuter()){ // Implemente imperativo
-	    for(var i = 0; i < this.length; i++)
-        z =  f(z, this[i]);
-      return z; 	   
+		for(var i = 0; i < this.length; i++)
+			z =  f(z, this[i], i);
+		return z; 	   
    }
    reduceBreak(f, init = neuter(), brk){ // Implemente imperativo
-	    for(var i = 0; i < this.length; i++)
-        if( !brk(this[i]) )
-          init = f(init,this[i]);
-      return init;
+	    for(var i = 0; i < this.length; i++){
+			if( !brk(this[i]) ){
+				init = f(init,this[i]);
+				if(init === false) break;
+			}	
+		}	
+		return init;
    }
    map(f){ // Implemente usando MyArray.reduce
-      return this.reduce( (z, x) => {z.push( f(x) );return z;}, []);
+		return this.reduce( (z, x) => {z.push( f(x) );return z;}, []);
    }
    forEach(f){ // Implemente usando MyArray.reduce
-	    return this.reduce( (z, x) => { f(x) }, this.neuter() );
+		return this.reduce( (z, x) => { f(x) }, this.neuter() );
    }
    filter(f){ // Implemente usando MyArray.reduceBreak
 	    return this.reduce( (z, x) => {if( f(x) ) z.push(x); return z;}, [] );
    }
    zip(other){ // Implemente usando MyArray.reduce
-	    return this.reduce( (z, x) => { z.push( [x, other] ); return z;}, []);
+	    return this.reduce( (z, x, i) => { z.push( [x, other[i]] ); return z;}, []);
    }
    every(f){ // Implemente usando MyArray.reduceBreak
-	  this.reportError('every')
+	  return this.reduceBreak( (z, x) => { return( f(x) ) ? true : false;}, false, (x) => f(x));
    }
    some(f){ // Implemente usando MyArray.reduceBreak
-	  this.reportError('every')
+	  this.reportError('some')
    }
    
 }
