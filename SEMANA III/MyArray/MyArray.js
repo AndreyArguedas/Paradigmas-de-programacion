@@ -35,12 +35,13 @@ class MyArray extends Array {
         }
       }
       return init;
-   }
+    }
+
    map(f){ // Implemente usando MyArray.reduce
-      return this.reduce( (z, x) => {z.push( f(x) );return z;}, []);
+		return this.reduce( (z, x) => {z.push( f(x) );return z;}, []);
    }
    forEach(f){ // Implemente usando MyArray.reduce
-	    return this.reduce( (z, x) => { f(x) }, this.neuter() );
+		return this.reduce( (z, x) => { f(x) }, this.neuter() );
    }
    filter(f){ // Implemente usando MyArray.reduceBreak
 	    return this.reduce( (z, x) => {if( f(x) ) z.push(x); return z;}, [] );
@@ -52,7 +53,7 @@ class MyArray extends Array {
 	    return this.reduceBreak( (z, x) => { if( f(x) ) return true; else return false; }, false, (x) => f(x));
    }
    some(f){ // Implemente usando MyArray.reduceBreak
-	    return this.reduceBreak( (z, x) => {if( f(x) ) return true; else return false;}, true, (x) => f(x));
+	  this.reportError('some')
    }
    
 }

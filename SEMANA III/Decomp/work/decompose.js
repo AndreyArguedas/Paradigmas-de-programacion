@@ -11,15 +11,10 @@ function decompose(n){
 }
 
 function fun_decompose(n,s,d){
-	console.log("ss");
 	var dec = (n, s, d) => {return ((d % 2)) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1)};
 	return dec(n, s, d);
 }
 
-function def(n){
-	let s = 0;
-	let d = n - 1;
-}
 
 module.exports = {
    decompose
