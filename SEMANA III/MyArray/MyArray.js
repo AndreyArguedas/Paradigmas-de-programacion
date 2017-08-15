@@ -24,13 +24,16 @@ class MyArray extends Array {
    }
    reduce(f, z = neuter()){ // Implemente imperativo
 	    for(var i = 0; i < this.length; i++)
-        z =  f(z, this[i]);
+        z =  f(z, this[i], i);
       return z; 	   
    }
    reduceBreak(f, init = neuter(), brk){ // Implemente imperativo
-	    for(var i = 0; i < this.length; i++)
-        if( !brk(this[i]) )
-          init = f(init,this[i]);
+	    for(var i = 0; i < this.length; i++){
+        if( !brk(this[i]) ){
+          init = f(init, this[i]);
+          if( init === false) break; 
+        }
+      }
       return init;
    }
    map(f){ // Implemente usando MyArray.reduce
@@ -43,13 +46,13 @@ class MyArray extends Array {
 	    return this.reduce( (z, x) => {if( f(x) ) z.push(x); return z;}, [] );
    }
    zip(other){ // Implemente usando MyArray.reduce
-	    return this.reduce( (z, x) => { z.push( [x, other] ); return z;}, []);
+	    return this.reduce( (z, x, i) => { z.push( [x, other[i]] ); return z;}, []);
    }
    every(f){ // Implemente usando MyArray.reduceBreak
-	  this.reportError('every')
+	    return this.reduceBreak( (z, x) => { if( f(x) ) return true; else return false; }, false, (x) => f(x));
    }
    some(f){ // Implemente usando MyArray.reduceBreak
-	  this.reportError('every')
+	    return this.reduceBreak( (z, x) => {if( f(x) ) return true; else return false;}, true, (x) => f(x));
    }
    
 }
