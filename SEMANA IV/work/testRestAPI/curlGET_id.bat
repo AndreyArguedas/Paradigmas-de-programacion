@@ -1,0 +1,1 @@
+curl --max-time 5 http://localhost:8080/api/bears/599340a496f97e28c48e2ffc

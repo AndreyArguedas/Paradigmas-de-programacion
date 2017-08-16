@@ -1,0 +1,1 @@
+mongoexport -d bears --fields name -c bears --out bears.json

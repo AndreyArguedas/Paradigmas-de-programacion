@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" --max-time 5 --data @bear.json http://localhost:8080/api/bears
