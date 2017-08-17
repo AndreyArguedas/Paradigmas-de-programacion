@@ -31,15 +31,8 @@ function counterDecompose(n) {
 }
 
 function count_decompose(n, s, d, c = 1) {
-	console.log("ESTOY CON " + n )
 	let count = (n, s, d) => { return ( (d % 2) ) ? c : count_decompose(n, ++s, d>>=1, ++c) };
 	return count(n, s, d, c);
-}
-
-function mainTest(arr){
-	for(let i = 0; i < arr.length; i++){
-		console.log(Math.log2(arr[i]) + " " + counterDecompose(arr[i]));
-	}
 }
 
 
@@ -47,9 +40,6 @@ let odds = oddNumbers();
 
 let firstThousand = numbersToArray(10, odds);
 
-mainTest(firstThousand);
-
-//console.log(counterDecompose(91534337));
 
 module.exports = {
    counterDecompose, oddNumbers, numbersToArray
