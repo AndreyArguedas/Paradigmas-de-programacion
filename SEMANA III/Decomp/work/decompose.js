@@ -11,7 +11,8 @@ function decompose(n){
 }
 
 function fun_decompose(n,s,d){
-	var dec = (n, s, d) => {return ((d % 2)) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1)};
+	console.log("ENTRE");
+	let dec = (n, s, d) => { return ( (d % 2) ) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1) };
 	return dec(n, s, d);
 }
 
