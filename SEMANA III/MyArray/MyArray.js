@@ -52,8 +52,9 @@ class MyArray extends Array {
 	    return this.reduceBreak( (z, x) => f(x), false, x => !f(x));
    }
    some(f){ // Implemente usando MyArray.reduceBreak
-	    //return this.reduceBreak( (z, x, i) => , false, x => f(x));
-
+      let pass = false;
+      this.reduceBreak( (z, x) => x, false, x => pass = f(x));
+      return pass;
    }
    
 }
