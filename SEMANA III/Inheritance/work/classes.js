@@ -12,7 +12,7 @@ A.prototype.f = function(){
 	return this.w * this.w;
 }
 
-function B(w, h){
+function B(w, h = w){
 	A.call(this, w);
 	this.h = h;
 }

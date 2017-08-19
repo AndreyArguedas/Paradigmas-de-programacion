@@ -36,11 +36,6 @@ function count_decompose(n, s, d, c = 1) {
 }
 
 
-let odds = oddNumbers();
-
-let firstThousand = numbersToArray(10, odds);
-
-
 module.exports = {
    counterDecompose, oddNumbers, numbersToArray
 }

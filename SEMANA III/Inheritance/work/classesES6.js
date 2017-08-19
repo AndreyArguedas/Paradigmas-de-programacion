@@ -9,7 +9,7 @@ class A {
 }
 
 class B extends A{
-	constructor(w, h){
+	constructor(w, h = w){
 		super(w);
 		this.h = h;
 	}
@@ -18,10 +18,6 @@ class B extends A{
 		return super.f() / 2;
 	} 
 	
-}
-
-B.prototype.f = function(){
-		return A.prototype.f.call(this) / 2;
 }
 
 module.exports =  {
