@@ -1,0 +1,44 @@
+<!--
+  @author loriacrlos@gmail.com
+  @since 2016
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Event Firing</title>
+		<meta charset="UTF-8">
+		<style>
+		  body{
+		     margin-top:5%;
+			 margin-left:20%;
+		  }
+		  #btn{
+		    margin-left:15%;
+		  }
+		  
+		</style>
+		<script>
+		   window.onload = e => {
+		      const txt = document.getElementById("txt");
+			  txt.innerHTML = '';
+			  const btn = document.getElementById("btn");
+			  const eventName = "csh";
+			  const wisdom = { detail : "CSH: Best team ever!" }
+					
+			  // Custom  event: see https://developer.mozilla.org/en/docs/Web/API/CustomEvent
+			  const event = new CustomEvent(eventName, wisdom);
+			
+			  // Add listener
+			  document.addEventListener(eventName, e =>  txt.innerHTML += e.detail + "\n");
+			  // Register listener for  button
+			  btn.onclick = e => document.dispatchEvent(event);
+			  
+			}
+		</script>
+	</head>
+	<body>
+	    <textarea id="txt" rows="20" cols="40">
+		</textarea> <br/>
+		<button id="btn">Wisdom saying</button>
+	</body>
+</html>

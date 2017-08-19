@@ -1,0 +1,54 @@
+<!--
+  @author loriacrlos@gmail.com
+  @since 2017
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Worker</title>
+		<meta charset="UTF-8">
+		<style>
+		  body{
+		     margin-top:5%;
+			 margin-left:20%;
+		  }
+		  #btn{
+		    margin-left:10%;
+		  }
+		</style>
+		<script>
+		  // Util functions
+		  let dateToHHMMSS = date => [date.getHours(), date.getMinutes(), date.getSeconds()]
+						              .map(s => addZero(s.toString()))
+						              .join(":")
+		  ;
+		  let addZero = s => (s.length < 2) ? ("0" + s) : s;
+		  
+		  // Register
+		  window.onload = e => {
+			var myWorker = new Worker("worker.js");
+			function postMsg(msg) {
+			  myWorker.postMessage({msg : msg});
+			}
+            var txt = document.getElementById("txt");
+			txt.innerHTML = '';
+			setInterval(() => postMsg('main'), 1000);
+			var times = 0;
+			myWorker.onmessage = function(e) {
+				 txt.innerHTML += ++times + ") " + e.data.msg + "\n";
+				 if (times > 20)
+				     myWorker.terminate();
+			}
+			//Start clock
+			setInterval(() =>  document.getElementById("time").innerHTML = dateToHHMMSS(new Date()), 10);
+		  }
+		</script>
+	</head>
+	<body>
+		<textarea id="txt" rows="20" cols="40">
+		</textarea>
+		<br/>
+		<button id="btn">Click Me</button>
+		<Time:<span id="time"></span></p>
+	</body>
+</html>

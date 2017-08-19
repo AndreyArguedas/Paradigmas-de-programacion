@@ -1,0 +1,90 @@
+<!--
+  @author loriacrlos@gmail.com
+  @since 2017
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Worker With Promises </title>
+		<meta charset="UTF-8">
+		<style>
+		  body{
+		     margin-top:5%;
+			 margin-left:20%;
+		  }
+		  #btn{
+		    margin-left:10%;
+		  }
+		</style>
+		<script>
+		  // Util functions
+		  let dateToHHMMSS = date => [date.getHours(), date.getMinutes(), date.getSeconds()]
+						              .map(s => addZero(s.toString()))
+						              .join(":")
+		  ;
+		  let addZero = s => (s.length < 2) ? ("0" + s) : s;
+		  
+		  // Model
+		  var myWorker = new Worker("worker.js");
+		  var times = 0;
+		  var txt;
+		  var clock;
+		  
+		  // View related functions
+		  function initView(e){
+		    txt = document.getElementById("txt");
+			txt.innerHTML = '';
+			clock = document.getElementById("time");
+		  }
+		  function updateView (e) {
+		         txt.innerHTML += ++times + ") " + e.data.msg + "\n";
+				 
+		  }
+		  
+		  function startClock(){
+		    setInterval(() =>  clock.innerHTML = dateToHHMMSS(new Date()), 10);
+		  }
+		  
+		  function CheckStopWorker(e){
+		     if (myWorker && times > 20)
+				 myWorker.terminate();
+		  }
+		  
+		  // Worker related functions
+		  function postMsg(msg) {
+		      if (myWorker)
+			     myWorker.postMessage({msg : msg});
+		  }
+		  
+		  function startWork(){
+		     setInterval(() => postMsg('main'), 500);
+		  }
+		  
+		  // Promise related functions to customize in own Promise
+		  function fromEvent(e, f = x => x){ return Promise.resolve(f(e));}
+		  const logError = e => console.log(e);
+		  
+		  // Window Load-WorkFlow
+		  
+		  window.onload = e => {
+		     fromEvent(e)
+			.then(initView)
+			.then(startClock)
+			.then(_ => myWorker.onmessage =  e =>  fromEvent(e) // Worker Message-Workflow
+			                                      .then(updateView) 
+							                      .then(CheckStopWorker) )
+			.then(startClock)
+			.then(startWork)
+		    .catch(logError)
+			
+		  }
+		</script>
+	</head>
+	<body>
+		<textarea id="txt" rows="20" cols="40">
+		</textarea>
+		<br/>
+		<button id="btn">Click Me</button>
+		<Time:<span id="time"></span></p>
+	</body>
+</html>
