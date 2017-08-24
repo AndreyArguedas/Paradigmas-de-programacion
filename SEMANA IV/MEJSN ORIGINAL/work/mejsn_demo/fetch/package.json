@@ -1,0 +1,19 @@
+{
+  "name": "fetch",
+  "author": "loriacarlos@gmail.com",
+  "license": "ISC",
+  "version": "1.0.0",
+  "description": "Testing fetch from node using mejsn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CarlosLoriaSaenz/mejsn-fetch"
+  },
+  "main": "fetch.js",
+  "dependencies": {
+    "node-fetch": "^1.7.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node fetch.js"
+  }
+}

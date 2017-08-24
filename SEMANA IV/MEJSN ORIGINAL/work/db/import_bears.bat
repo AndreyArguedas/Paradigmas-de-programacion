@@ -1,0 +1,1 @@
+mongoimport --db bears --collection bears --drop --file bears.json

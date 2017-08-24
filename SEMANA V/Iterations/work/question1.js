@@ -8,7 +8,7 @@
 const {iterator} = require('./iterations')
 
 function q1Generator(list, max){
-	throw new Error('to do');
+
 }
 
 module.exports = {

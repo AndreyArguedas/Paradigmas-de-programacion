@@ -1,0 +1,1 @@
+curl --max-time 5 http://localhost:8080/api
