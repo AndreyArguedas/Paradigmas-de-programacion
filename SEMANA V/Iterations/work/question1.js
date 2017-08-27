@@ -8,10 +8,18 @@
 const {iterator} = require('./iterations')
 
 function q1Generator(list, max){
+	return generator(list, max);
+}
 
+function *generator(list, max){
+	let i = 0;
+	while( i <= max){
+		if(list.every( (e) => i % e))
+			yield i;
+		i++;
+	}
 }
 
 module.exports = {
-	q1Generator
-	
+	q1Generator	
 }
