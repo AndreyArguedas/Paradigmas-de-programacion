@@ -68,7 +68,7 @@ router.route('/bears')
 							if (err)
 								res.send(err);
 							console.log('Post Error = ' + err);
-							res.json({ message: 'Bear created!', "bearId" : bear._id});
+							res.json({ message: 'Bear created!', "name" : bear.name, "_id" : bear._id});
 				});	
 	})
 

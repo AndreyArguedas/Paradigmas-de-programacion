@@ -17,6 +17,10 @@ body {
    background-color: lightyellow;
 }
 
+#buttonPostBear {
+	margin-top : 22px;
+}
+
 #respArea{
 	margin-right: 45%;
     border-style: solid;
