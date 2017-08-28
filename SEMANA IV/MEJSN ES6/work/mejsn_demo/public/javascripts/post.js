@@ -1,19 +1,23 @@
 $(document).ready( () => {
 	// Simulamos un modelo
-	function Model(){
-	   this.count = 0;
-	   this.results = [];
-	   
-	};
-	Model.prototype.last = function(){
-	  return this.results[this.results.length-1];
+	class Model{
+
+		constructor(){
+			this.count = 0;
+	   		this.results = [];
+		}
+
+		last(){
+			return this.results[this.results.length-1];
+		}
+
+		update(data){
+	  		this.results[this.count++] = " " + this.count + ") " + data.name + " " + data._id;
+		}
 	}
 
-	Model.prototype.update = function(data){
-	  this.results[this.count++] = " " + this.count + ") " + data.name + " " + data._id;
-	}
 
-	var model = new Model();
+	let model = new Model();
 
 	$("#buttonPostBear").click( () => {
 		 $.ajax({url: '../../api/bears', 

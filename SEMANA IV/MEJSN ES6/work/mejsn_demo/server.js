@@ -1,9 +1,3 @@
-/*
-  Demo Rest API
-  loriacarlos@gmail.com/docs/connections
-  EIF400
-*/
-
 // IMPORTS
 let express    = require('express');
 let bodyParser = require('body-parser');
@@ -20,6 +14,8 @@ app.use(bodyParser.json());
 let port     = process.env.PORT || 8080; // set  port (default 8080)
 ///////////////////////////////////////////////////////////////////////////////
 // CONNECT TO DB
+mongoose.Promise = global.Promise; //Promises for mongoose
+
 mongoose.connect('mongodb://localhost/bears',
                  {
 					 useMongoClient: true
@@ -64,22 +60,22 @@ router.route('/bears')
 				bear.name = req.body.name;  // set the bears name (comes from the request)
 										// **** NOTICE: We should avoid potential injection *****
 										// https://en.wikipedia.org/wiki/Code_injection
-				bear.save( (err) => {
-							if (err)
-								res.send(err);
-							console.log('Post Error = ' + err);
-							res.json({ message: 'Bear created!', "name" : bear.name, "_id" : bear._id});
+				bear.save()
+				.then((bear) =>{
+					res.json({ message: 'Bear created!', "name" : bear.name, "_id" : bear._id});
+				})
+				.catch( (err) => {
+					res.send(err);
+					console.log('Post Error = ' + err);			
 				});	
 	})
 
 	// get all the bears (accessed at GET http://localhost:8080/api/bears)
 	.get( (req, res) => {
 		console.log('GET requested');
-		Bear.find( (err, bears) => {
-			        if (err)
-				       res.send(err);
-			        res.json(bears);
-		});
+		Bear.find()
+		.then( (bears) => res.json(bears) )
+		.catch( (err) => res.send(err)) 
 	});
 
 // ON /bears/:bear_id
@@ -88,42 +84,27 @@ router.route('/bears/:bear_id')
 
 	// GET
 	.get( (req, res) => {
-		     Bear.findById(req.params.bear_id, 
-		                    (err, bear) => {
-						      if (err)
-							     res.send(err);
-						      res.json(bear);
-		             });
+		     Bear.findById(req.params.bear_id)
+		     .then( (bear) => res.json(bear))
+		     .catch( (err) => res.send(err)) 
 	 })
 
 	// UPDATE 
 	.put( (req, res) => {
-		Bear.findById(req.params.bear_id, (err, bear) => {
-
-			if (err)
-				res.send(err);
-
-			bear.name = req.body.name;
-			bear.save( (err) => {
-				if (err)
-					res.send(err);
-
-				res.json({ status: 'ok', message: 'Bear updated!' });
-			});
-
-		});
+		let updateName = (data, req) => {return new Promise( (resolve) => data.name = req.body.name)}
+		let save = (data) => {return (resolve) => data.save()}
+		Bear.findById(req.params.bear_id)
+		.then( (bear, req) => updateName(bear, req))
+						 .then( save(res) )
+						 .then( (res) => res.json({ status: 'ok', message: 'Bear updated!' }))
+		.catch( (err) => res.send(err))
 	})
 
 	// DELETE
 	.delete( (req, res) => {
-		Bear.remove({
-			_id: req.params.bear_id
-		}, (err, bear) => {
-			if (err)
-				res.send(err);
-
-			res.json({ status: 'ok', message: 'Successfully deleted' });
-		});
+		Bear.remove({_id: req.params.bear_id}).
+		then( (res) => res.json({ status: 'ok', message: 'Successfully deleted' }))
+		.catch( (err) => res.send(err) )
 	});
 
 ///////////////////////////////////////////////////////////////////////

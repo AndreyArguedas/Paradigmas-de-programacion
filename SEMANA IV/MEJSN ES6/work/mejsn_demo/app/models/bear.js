@@ -1,8 +1,8 @@
 
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+let mongoose     = require('mongoose');
+let Schema       = mongoose.Schema;
 
-var BearSchema   = new Schema({
+let BearSchema   = new Schema({
 	name: String
 });
 

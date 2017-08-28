@@ -3,25 +3,28 @@
    Spaghetti code flow
 */
 // Util
-function addZero(s){
-		 return  (s.length < 2) ? ("0" + s) : s;
-}
+let addZero = (s) => { return  (s.length < 2) ? ("0" + s) : s; }
+
 // Registro de eventos (onload)
-$(document).ready(function(){
+$(document).ready( () => {
 	// Simulamos un modelo
-	function Model(){
-	   this.count = 0;
-	   this.results = [];
-	   
-	};
-	Model.prototype.update = function(data){
-	  var date = new Date();
-	  this.results[this.count++] = "'" + data + "' a las " + date;
+	class Model{
+		constructor() {
+	   		this.count = 0;
+	   		this.results = [];
+	    }
+
+	    update(data) {
+	    	let date = new Date();
+	  		this.results[this.count++] = "'" + data + "' a las " + date;
+	    }
+
+	    last() {
+	    	return this.results[this.results.length-1];
+	    }
 	}
-	Model.prototype.last = function(){
-	  return this.results[this.results.length-1];
-	}
-	var model = new Model();
+
+	let model = new Model();
 	// Controller
 	// Onclick request
 	$("#requestAjax").click(function(){
@@ -30,27 +33,27 @@ $(document).ready(function(){
 			   type:'GET',
 			   dataType:'text'
 
-			 }).done(function(result){
+			 }).done( (result) => {
 					  model.update(result);
 					  $("#text h2 span")
 						.html(model.last())
 						.addClass("big red underline");
 					  $("#requestAjax").prop( "disabled", true );
 					  setTimeout(
-						function(){
+						  () => {
 						  $("#requests").append("<br/>" + model.count + ". "+ model.last());
 						  $("#requestAjax").prop("disabled", false );
 						}, 5000);
 					})
-			  .fail(function(e, msg, excpn){
+			  .fail( (e, msg, excpn) => {
 				     alert('**** AJAX ERROR ' + msg + ' ****');
 					});
 		}); // onclick
 
-		var timer = setInterval(function(){
-		   var date = new Date();
-		   var time = [date.getHours(), date.getMinutes(), date.getSeconds()]
-					  .map(function(s){return addZero(s.toString());})
+		let timer = setInterval( () => {
+		   let date = new Date();
+		   let time = [date.getHours(), date.getMinutes(), date.getSeconds()]
+					  .map( (s) => {return addZero(s.toString());})
 					  .join(":");
 		   $("#time").text(time)
 		}, 10);
