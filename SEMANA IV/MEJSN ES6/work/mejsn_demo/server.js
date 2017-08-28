@@ -91,14 +91,10 @@ router.route('/bears/:bear_id')
 
 	// UPDATE 
 	.put( (req, res) => {
-		let updateName = (data, req) => {return new Promise( (resolve) => data.name = req.body.name)}
-		let save = (data) => {return (resolve) => data.save()}
-		Bear.findById(req.params.bear_id)
-		.then( (bear, req) => updateName(bear, req))
-						 .then( save(res) )
-						 .then( (res) => res.json({ status: 'ok', message: 'Bear updated!' }))
-		.catch( (err) => res.send(err))
-	})
+    	Bear.findByIdAndUpdate(req.params.bear_id, req.body.name, {new: true})
+    	.then( (res) => res.json({ status: 'ok', message: 'Bear updated!' }))
+        .catch( (err) => res.send(err) ) 
+    })
 
 	// DELETE
 	.delete( (req, res) => {
