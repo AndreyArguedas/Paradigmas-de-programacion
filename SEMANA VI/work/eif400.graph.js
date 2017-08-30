@@ -12,7 +12,7 @@ class Store { // Something that stores data and has an id and data
 	}
 	inspect(){return this.toString()} // how console.log shows this object
 	toString(){
-		return 'not implemented';
+		return '[ {id: ' + this.id + ' } ]';
 	}
 	
 }
@@ -56,20 +56,22 @@ class Graph extends Store {
 	constructor(id, data){ // creates a Graph with id and optionally data
 		super(id, data);
 		// add what you need
+		this.nodes = [];
+		this.edges = [];
 	}
 	
 	addNode(node){ // add a node to graph
-		
+		nodes.push(node);
 	}
 	addEdge(edge){ // add an new edge to graph
-		
+		edges.push(edge);
 	}
 	successors(nodeId){ // successor of a node by its id
 		
 		return ['not implemented'];
 	}
 	toString(){
-		return 'not implemented';
+		return super.toString() + edges.toString();
 	}
 	dfs(){ // dfs enumeration by alphabetic order; returns a path
 		let path = new Path();
