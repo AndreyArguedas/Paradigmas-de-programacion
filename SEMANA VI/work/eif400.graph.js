@@ -12,7 +12,7 @@ class Store { // Something that stores data and has an id and data
 	}
 	inspect(){return this.toString()} // how console.log shows this object
 	toString(){
-		return '[ {id: ' + this.id + ' } ]';
+		return 'not implemented';
 	}
 	
 }
@@ -21,14 +21,20 @@ class Node extends Store { // A Node
 		super(id, data); 
 	}
 	
+	toString(){
+		return "node: " + this.id + " ";
+	}
 	
 }
 class Edge extends Store { // An edge from Node left to Node right
 	constructor(id, left, right, data){
 		super(id, data);
 		this.left = left;
-		this.right = right;
-		
+		this.right = right;	
+	}
+
+	toString(){
+		return ""+ this.left.id + "--[" + this.id + "]--> " + this.right.id +"";
 	}
 	
 } 
@@ -51,6 +57,13 @@ class Path { // A Path; used by dfs and components
 		return this.visited;
 	}
 }
+
+function* iterator(edges){ //This generator is for converting graph iterable
+	for(let edge of edges) //Unfortunetly we can not use yield inside a foreach
+		yield edge;
+	return {done : true}
+}
+
 class Graph extends Store {
 	
 	constructor(id, data){ // creates a Graph with id and optionally data
@@ -59,19 +72,33 @@ class Graph extends Store {
 		this.nodes = [];
 		this.edges = [];
 	}
+
+	[Symbol.iterator](){ //Making graph iterable
+	  this.iter = iterator(this.edges);
+      return this;
+	}
+
+	next(){ //Next of the iterator
+		return this.iter.next();
+	}
 	
 	addNode(node){ // add a node to graph
-		nodes.push(node);
+		this.nodes.push(node);
 	}
 	addEdge(edge){ // add an new edge to graph
-		edges.push(edge);
+		this.edges.push(edge);
 	}
 	successors(nodeId){ // successor of a node by its id
-		
-		return ['not implemented'];
+		let aux = [];
+		let successors = [];
+		aux = this.edges.filter( (x) => x.right.id === nodeId);
+		aux.forEach( (x) => successors.push(x.left.id)); //No me gusta, pero no encontre otra forma
+		return [successors.toString()];
 	}
 	toString(){
-		return super.toString() + edges.toString();
+		let edgesToString = "";
+		this.edges.forEach( (x) => edgesToString += x.toString());
+		return '[ {id: ' + this.id + '}' + edgesToString + ' ]';
 	}
 	dfs(){ // dfs enumeration by alphabetic order; returns a path
 		let path = new Path();
@@ -79,10 +106,17 @@ class Graph extends Store {
 		return path;
 	}
 	degree(nodeId){ // degree of a node given its nodeId
-		return [];
+		let neighbors = new Set(); //Using a set because only allows unique values
+		this.edges.forEach( x => {if(x.right.id === nodeId || x.left.id === nodeId){
+			neighbors.add(x.right.id);neighbors.add(x.left.id);}});
+		neighbors.delete(nodeId);
+		return neighbors.size;
+		//return []; No le veo logica
 	}
 	degrees(){ // nodes and its degrees
-		return [];
+		let degrees = [];
+		this.nodes.forEach( (x) => degrees.push({ node: x.id, degree: this.degree(x.id) }));
+		return degrees;
 	}
 	components(){ // number of connected compononents 
 		let path = new Path();
@@ -91,6 +125,8 @@ class Graph extends Store {
 	}
 	
 }
+
+
 
 module.exports = {
 	Node : Node,
