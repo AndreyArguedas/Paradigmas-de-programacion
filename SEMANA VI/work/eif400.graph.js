@@ -43,6 +43,7 @@ class Path { // A Path; used by dfs and components
 		this.visited = {}; // {ni:dfsi}
 		this.counter = 1;  // current dfs number
 		this.times   = 0;  // number of times the path has been updated
+		this.stack = [];
 	}
 	next(){
 		this.times++;
@@ -102,7 +103,19 @@ class Graph extends Store {
 	}
 	dfs(){ // dfs enumeration by alphabetic order; returns a path
 		let path = new Path();
-		
+		if(this.nodes.length)
+			path.stack.push(this.nodes.shift()); //Getting the first
+
+		while(path.stack.length){
+			let current = path.stack.pop();
+			if(!path.hasVisited(current.id)){ //Si current no ha sido visitado
+				path.visit(current.id);
+				for(let n of this.neighbors(current)){
+					console.log(current.id + " " + n);
+					path.stack.push(n);
+				}
+			}
+		}
 		return path;
 	}
 	degree(nodeId){ // degree of a node given its nodeId
@@ -122,6 +135,14 @@ class Graph extends Store {
 		let path = new Path();
 		
 		return path.times;
+	}
+
+	neighbors(node){
+		let neighbors = new Set(); //Using a set because only allows unique values
+		this.edges.forEach( x => {if(x.right === node || x.left === node){
+			neighbors.add(x.right);neighbors.add(x.left);}});
+		neighbors.delete(node);
+		return Array.from(neighbors).sort().reverse(); //Sort by alphabetics
 	}
 	
 }
