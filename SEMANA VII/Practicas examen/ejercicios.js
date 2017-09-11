@@ -101,7 +101,38 @@ console.log(copy(54,5));
 //Combinador
 
 function copy(x, n){
-    return Array.from( new Array(n), (e) => e = x);
+    return Array.from( new Array(n), (e) => x);
 }
 
 console.log(copy(54,5));
+
+//Ejercicio 11
+
+//Combinador
+
+function innerProd(l1, l2){
+    if(!l1.length && !l2.length)
+        return 0;
+    else{
+        return l1.reduce( (z, x, i) => z + x * l2[i] , 1);
+    }
+}
+
+let l1 = [50, 98, 100];
+let l2 = [47, 16, 57];
+
+console.log(innerProd(l1, l2));
+
+//Recursivo
+
+function innerProdRec(l1, l2){
+    if(!l1.length && !l2.length)
+        return 0;
+    return innerProdRec(l1.slice(1,l1.length),l2.slice(1,l2.length)) + l1[0] * l2[0];
+
+}
+
+let l3 = [50, 98, 100];
+let l4 = [47, 16, 57];
+
+console.log(innerProdRec(l3, l4));
