@@ -114,7 +114,7 @@ function innerProd(l1, l2){
     if(!l1.length && !l2.length)
         return 0;
     else{
-        return l1.reduce( (z, x, i) => z + x * l2[i] , 1);
+        return l1.reduce( (z, x, i) => z + x * l2[i] , 0);
     }
 }
 
@@ -125,14 +125,48 @@ console.log(innerProd(l1, l2));
 
 //Recursivo
 
-function innerProdRec(l1, l2){
+function innerProdRec(l1, l2, acum){
     if(!l1.length && !l2.length)
-        return 0;
-    return innerProdRec(l1.slice(1,l1.length),l2.slice(1,l2.length)) + l1[0] * l2[0];
-
+        return acum;
+    return innerProdRec(l1.slice(1,l1.length),l2.slice(1,l2.length),acum += l1[0] * l2[0]);
 }
 
 let l3 = [50, 98, 100];
 let l4 = [47, 16, 57];
 
-console.log(innerProdRec(l3, l4));
+console.log(innerProdRec(l3, l4, 0));
+
+//Ejerccio 12
+
+function split(l, pivot, f = (x, piv) => x < piv){
+    return l.reduce( (z, x) => {f(x, pivot) ? z[0].push(x) : z[1].push(x); return z}, [new Array, new Array]);
+}
+
+let l = [89,57,21,12,35,1457,964,984];
+
+console.log(split(l, 100));
+
+//Testing with objects
+
+let l = [{name : "a"}, {name: "g"}, {name: "l"}]
+
+console.log(split(l, "b", (x, piv) => x.name > piv));
+
+//Ejercicio 13
+
+function majority(l){
+    return Math.abs(l.filter((x) => x == true).length - l.filter( (x) => x == false).length);
+}
+
+let l = [true, false, false, true, false];
+
+console.log(majority(l));
+
+
+//Ejercicio 15
+
+let l = [5, 9, 14];
+
+console.log(l.map( (x) => Math.pow(x, 3) )); //Con map
+
+console.log(l.reduce( (z, x, i) => { l[i] = Math.pow(x, 3); return z; }, l)); //Con reduce
