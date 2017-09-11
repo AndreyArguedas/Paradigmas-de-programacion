@@ -1,0 +1,72 @@
+/* Notes on kotlin */
+
+En 1936 se puede decir que es donde se concibe la FP, aunque no habian compus
+El lambda calculs crea las bases
+
+Las primeras pcs para nada usaban FP, todos los programas eran secuenciales
+
+Fortran es el lenguaje mas longevo que aun vive
+
+John Backus(Fortran) se pregunto si se podria liberar la programacion del modelo
+Von Neumnan
+
+Hasta aca FP solo exixtia en papel
+
+Mutabilidad
+
+La idea de FP es que mediante los inputs no se cambien y solo se generen
+nuevos outputs, no hay side effects, cada parte del codigo no interfeire
+por eso en MATHS es bonito
+
+La inmutabilidad no la podemos controlar en nuestros compis, lo mas que podemos
+hacer es decir que se puede ser voluntariamente inmutable si escribe una
+clase inmutable.
+
+Higher Order
+
+
+
+                            RESPUESTAS
+Respuesta 1 : En el momento que se habla de la historia de FP,
+el autor habla sobre los tiempos en que FP solo existía en papel
+y algunos desarrolladores comenzaban a hacer investigacion sobre
+como liberar la programacion del modelo Von Neuman, una persona del
+publico pregunta sobre LISP, y el autor le responde que al salir LISP
+ya existian algunos lenguajes funcionales. 
+
+Respuesta 2 : El autor piensa que no se puede evitar el estado mutable al 100%,
+ya que contradice la alteracion del mundo exterior en terminos de programacion,
+y que tambien en ocasiones es necesario mutar propiedades. Ademas la inmutabilidad
+no la pueden controlar los compiladores, un "approach" para lograr la inmutabilidad
+es hacer clases inmutables.
+
+Respuesta 3 : Higher-Order functions nos permiten encapsular ciertas
+estrategias para logar un resultado, en el ejemplo vemos como por medio
+de algunos patrones de diseños se crean estrategias que soluciona alguna necesidad
+y se encapsulan en una high-order function, ademas una vez creada nos permiten
+escribir menos codigo.
+
+Respuesta 4 : El autor piensa que si se quiere optimizacion quizas
+usar FP no sea la mejor opción, sin embargo dependiendo del problema
+a implementar se requieren maneras de disminuir o evitar
+la mutabiblidad, por lo que se debe pensar primero en el problema y
+pensar si FP es la opcion mas indicada
+
+Respuesta 5 : El autor muestra que no hay pattern matching nativo en
+kotlin y que seria muy bueno tenerlo, en el ejemplo el usa la sentencia "when"
+con los casos que se busca encontrar del mensaje enviado por el server, ademas
+de la utilización de lambdas. 
+
+Respuesta 6 : El autor da Scala como una opcion a Kotlin, cuando
+se quiere tener poco codigo que realize el trabajo, ademas menciona
+que Scala es bastante poderoso, pero luego menciona que si se quiere
+una aplicacion de gran escala que sea entendible por muchas personas
+y que aun así tenga buen performance, Kotlin sería mejor opción.
+
+Respuesta 7 : 
+
+fun main(args: Array<String>) {
+    val ints = Array(100, {i -> i })
+    val result = ints.filter{ it % 2 == 1 }.map{ it * it }
+    println(result)
+}
