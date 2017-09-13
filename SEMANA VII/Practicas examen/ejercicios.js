@@ -336,3 +336,94 @@ function esSegmento(xs, ys){
 
 console.log(esSegmento([1, 2, 3], [7, 4, 1, 65, 1, 2, 3]));
 console.log(esSegmento([1, 2, 3], [7, 4, 1, 9, 1, 2, 5]));
+
+//Ejercicio 2.6
+
+//La idea es ir por cada elemento, sacarlo del array y preguntar si hay otro igual, si no lo hay se vuelve a meter al array
+
+function eliminarDuplicados(a) {
+    return a.reduce( (z, x, i) => {
+        z.splice(i, 1);
+        if(!z.includes(x))  z.push(x);
+        return z;
+    }, a); 
+}
+
+console.log(eliminarDuplicados([4,6,9,5,4,9,6,3]));
+
+//Ejercicio flatten diagnostico
+
+function flatten(a){
+    
+    function flat(a, result){
+        if(!Array.isArray(a))
+            return result.concat(a);
+        else{
+            return a.length == 0 ? result : flat(a.slice(1), flat(a[0], result));
+        }
+    }
+
+    return flat(a, []);
+}
+
+
+console.log(flatten([[[1, [2]], [[]], [[[3]]],4]]));
+
+//Ejercicio 2.7
+/*function sc(a){ Estoy pegado en esta
+
+    function sucesivos(a, result){
+        if(a.length == 0)
+            return result;
+        else{
+
+        }
+    }
+}*/
+
+//Ejerccio 2.10
+
+function mapAlt(list, f1, f2){
+    return list.map( x => list.indexOf(x) % 2 == 0 ? f1(x) : f2(x));
+}
+
+console.log(mapAlt([40, 20, 95], x => x + x, x => x - x));
+
+///Llamando a array.prototype
+
+Array.prototype.mapAlt = function(f1, f2)  {
+    return this.map( x => this.indexOf(x) % 2 == 0 ? f1(x) : f2(x));
+}
+
+let rest = [40, 20, 95].mapAlt(x => x + x, x => x - x);
+console.log(rest);
+
+//Ejercicio 2.11
+
+function luhm(card) {
+    return card.mapAlt(x => x, x => (2 * x > 9) ? 2 * x - 9 : 2 * x)
+                .reduce( (z, x) => z + x, 0) % 10 == 0;
+}
+
+console.log(luhm([1, 2, 3, 4, 5, 6, 7]));
+
+//Ejercicio 2.14
+
+function numDifAsc(a) {
+
+    function cola(a, result){
+        if(!a.length)
+            return result;
+        else{
+            if(!result.includes(a[0])) 
+                result.push(a[0]);
+            return cola(a.slice(1, a.length), result);
+        }
+            
+    }
+
+    return cola(a, []).length;
+}
+
+console.log(numDifAsc([1,2,2,5,5,5,5,7,8])); //Es O(n) y sirve con listas desordenadas
+console.log(numDifAsc([5,1,4,3,8,8,8]));
