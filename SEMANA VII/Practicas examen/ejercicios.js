@@ -162,6 +162,8 @@ let l = [true, false, false, true, false];
 
 console.log(majority(l));
 
+//Ejercicio 14
+
 
 //Ejercicio 15
 
@@ -170,3 +172,62 @@ let l = [5, 9, 14];
 console.log(l.map( (x) => Math.pow(x, 3) )); //Con map
 
 console.log(l.reduce( (z, x, i) => { l[i] = Math.pow(x, 3); return z; }, l)); //Con reduce
+
+//Ejercicio 16
+
+
+//Ejercicio 17
+
+function gcd(n, m){
+    function cola(n, m){
+        if( n === m)
+            return n;
+        else{
+            if(n > m)
+                return cola(n - m, m);
+            else
+                return cola(n, m - n);
+        }
+    }
+    return cola(n, m);
+}
+
+console.log(gcd(100,24));
+
+//Ejercicio 18
+
+class Person{
+
+    constructor(name, edad, telefono){
+        this.name = name;
+        this.edad = edad;
+        this.tel = telefono;
+        this.friends = [];
+    }
+
+    addFriend(f){
+        this.friends.push(f);
+    }
+}
+
+let p1 = new Person("andrey", 21, "892-6543-7865");
+let p2 = new Person("chen", 21, "992-7676-7676");
+let p3 = new Person("guns", 21, "292-9090-9090");
+let p4 = new Person("kim", 20, "911-1111-1221");
+
+p1.addFriend(p2);
+p2.addFriend(p1);
+p2.addFriend(p3);
+p2.addFriend(p4);
+p3.addFriend(p4);
+p4.addFriend(p3);
+p1.addFriend(p3);
+
+function contactosDe(p, criterio){
+    return p.friends.reduce( (z, x) => {if(criterio(x, p)) z.push(x); return z}, []);
+}
+
+console.log(contactosDe(p2, (x, p) => p.friends.includes(x)));
+console.log(contactosDe(p2, (x, p) => x.tel.match(/^[89]/)));
+console.log(contactosDe(p1, (x, p) => !x.friends.includes(p)));
+
