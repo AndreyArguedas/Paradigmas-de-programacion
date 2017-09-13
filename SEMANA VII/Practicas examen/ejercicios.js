@@ -223,11 +223,116 @@ p3.addFriend(p4);
 p4.addFriend(p3);
 p1.addFriend(p3);
 
-function contactosDe(p, criterio){
-    return p.friends.reduce( (z, x) => {if(criterio(x, p)) z.push(x); return z}, []);
+function contactosDe(p, criterio, extra = x => x){
+    return extra(p.friends.reduce( (z, x) => {if(criterio(x, p)) z.push(x); return z}, []));
 }
 
 console.log(contactosDe(p2, (x, p) => p.friends.includes(x)));
 console.log(contactosDe(p2, (x, p) => x.tel.match(/^[89]/)));
 console.log(contactosDe(p1, (x, p) => !x.friends.includes(p)));
+console.log(contactosDe(p1, (x, p) => p.friends.includes(x), (a) => a.reduce( (z, x, i) => z + x.edad, 0) / a.length ));
 
+
+//Ejetcicio 20
+
+function pascal(n){ //Version que se me ocurrio, bastante larga
+
+    function cola(n, acum, result){
+        if(n < 0) //Al llegar a una fila inferior a 0
+            return result;
+        else{
+            result.push(sacarFila(acum, result));
+            return cola(n - 1, acum + 1, result);
+        }
+    }
+
+    function sacarFila(acum, result){
+        if(result.length === 0) //Caso base - Fila 0
+            return [1];  
+        else
+            return rellenarFila(acum, 0, result[result.length - 1], []);
+    }
+
+    function rellenarFila(acum, index, last, arr){ //Llenar la fila acum con los numeros correspondientes
+        if(index == acum + 1)
+            return arr;
+        else{
+            if(index - 1 == -1 || index  == last.length)
+                arr.push(1);
+            else
+                arr.push(last[index - 1] + last[index]);
+            return rellenarFila(acum, index + 1, last, arr);
+        }
+    }
+
+    return cola(n, 0, []).join('\n');
+}
+
+console.log(pascal(0));
+console.log(pascal(4));
+
+
+/* SECCION 2 */
+
+//Ejercio 2.1
+function cuadrados(n){
+    let i = 1;
+    return Array.from( new Array(n), x => i++ ).map( x => x * x)
+}
+
+console.log(cuadrados(4));
+
+//Ejercio 2.2
+function cuantosPrimos(a){
+
+    function isPrimo(x, count, times){
+        if(count >= x / 2)
+            return times == 1;
+        else
+            return (x % count == 0) ? isPrimo(x, count + 1, times + 1) : isPrimo(x, count + 1, times);
+    }
+
+    return a.filter( x => isPrimo(x, 1, 0) ).length;
+}
+
+console.log(cuantosPrimos([7, 23, 35, 60, 98, 3, 100]));
+
+console.log(cuantosPrimos([10, 48, 74, 88, 100]));
+
+//Ejercio 2.3
+
+function diag(l){
+    l.reduce( (z, x) => {console.log(z + x); z += " "; return z}, "");
+}
+
+console.log(diag(['a','b','c','d','e']));
+
+//Ejercicio 2.4
+
+function aproxSeno(eps, x){
+
+    function cola(eps, x, y = 0){
+        if( Math.abs(taylor(x) - y) < eps) //La vara era no usar Math, pero para el abs me dio pereza
+            return y;
+        else
+            return cola(eps, x, y + 1);
+    }
+
+    function taylor(x){
+        //Duda con la n de la formula, es infinita?
+    }
+    
+    return cola(eps, x);
+}
+
+//Ejercicio 2.5
+
+function esSegmento(xs, ys){
+    if(ys.length < xs.length)
+        return false;
+    else
+        return xs.reduce( (z, x, i) =>  {if(x != ys[i]) z = false; return z}, true) ? true : esSegmento(xs, ys.slice(1, ys.length));        
+}
+
+console.log(esSegmento([1, 2, 3], [7, 4, 1, 65, 1, 2, 3]));
+console.log(esSegmento([1, 2, 3], [7, 4, 1, 9, 1, 2, 5]));
