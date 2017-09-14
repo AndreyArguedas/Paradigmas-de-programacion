@@ -427,3 +427,45 @@ function numDifAsc(a) {
 
 console.log(numDifAsc([1,2,2,5,5,5,5,7,8])); //Es O(n) y sirve con listas desordenadas
 console.log(numDifAsc([5,1,4,3,8,8,8]));
+
+//Ejercicio 2.15
+
+function numDifAscCombinador(a){
+    return a.reduce( (z, x) => {if(!z.includes(x)) z.push(x); return z;},[]).length
+}
+
+console.log(numDifAscCombinador([1,2,2,5,5,5,5,7,8])); //Es O(n) y sirve con listas desordenadas
+console.log(numDifAscCombinador([5,1,4,3,8,8,8]));
+
+//Ejercicio 2.16
+
+function lcs(n){
+
+    function cola(original, result, index) {
+        if(index == original.length)
+            return result;
+        else {
+            result.push(lista(original, result, index, index + 1,[])); //Saca las listas de los elementos que empiezan con index
+            return cola(original, result, index + 1);
+        }
+    }
+
+    function lista(original, result, index, count, aux) {
+        if(count == original.length)
+            return aux;
+        else{
+            if(sumInArray(aux) === n)
+                return aux;
+            else{
+                //Repensarlo
+            }
+        }
+    }
+
+    function sumInArray(aux){
+        return aux.reduce( (z, x) => z + x, 0);
+    }
+    let i = 1
+    return cola(Array.from( new Array(n - 1), x => i++ ), [], 0);
+}
+

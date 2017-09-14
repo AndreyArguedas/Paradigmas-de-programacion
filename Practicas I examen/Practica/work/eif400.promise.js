@@ -5,7 +5,7 @@
 */
 class PPromise extends Promise {
 	static from(value){
-		return this.resolve(value)
+		return this.resolve(value) //promise.resolve
 	}
 	static in() {return x => x};
 	
@@ -14,7 +14,7 @@ class PPromise extends Promise {
 	}
 	
 	constructor(ex = (t, e) => t() ){
-		super(ex);	
+		super(ex);	//Lo mismo que con new Promise( (t, c) => t() )
 	}
 	continue(s){
 		return this.then(it => it);
@@ -34,8 +34,13 @@ class PPromise extends Promise {
 		                            .find(it => it))	                            
 	}
 	thenAll(...funs){
-		throw new Error('thenAll not implemented')
+		let finalValue = funs[0].reduce( (z, x) =>  x(z), 6); 
+		return Promise.resolve(finalValue);
 	}
+}
+
+function test(){
+	PPromise.from(6).thenAll([x => x * x, x => x + 10]).then(x => console.log(x))
 }
 
 module.exports = {

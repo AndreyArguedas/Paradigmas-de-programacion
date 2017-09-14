@@ -1,4 +1,3 @@
-
 const fs = require('fs')
 
 const readFileWithFS = (filename, handleData, handleError) =>
@@ -15,7 +14,9 @@ testReadFileWithFS('eif400.examen.js');
 
 
 function readFileWithFSPromise(filename){ // Hacer!!
-    throw 'not implemented'
+	return new Promise ( (t, c) => {
+		fs.readFile(filename, (error, data) => (error) ? c(error) : t(data));
+	})
 }
 
 function testReadFileWithFSPromise(filename){
