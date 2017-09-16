@@ -164,6 +164,25 @@ console.log(majority(l));
 
 //Ejercicio 14
 
+function frecuencias(l, g, n){
+    return l.reduce( (z, x) => { g(x) !== 0 ? z[g(x)]++ : z[n]++; return z;},
+                               Array.from(new Array(n + 1), x => 0));
+}
+
+let grupo = [{gender : "male"}, {gender : "female"}, {gender : "male"}, {gender : "undefined"}];
+
+function agrupacion(x){
+    let group = 0;
+    
+    switch (x.gender){
+        case "male" : group = 1; break;
+        case "female" : group = 2; break;
+    }
+
+    return group;
+}
+
+console.log(frecuencias(grupo, x => agrupacion(x), 3));
 
 //Ejercicio 15
 
@@ -370,17 +389,41 @@ function flatten(a){
 console.log(flatten([[[1, [2]], [[]], [[[3]]],4]]));
 
 //Ejercicio 2.7
-/*function sc(a){ Estoy pegado en esta
+function sc(a){ 
 
-    function sucesivos(a, result){
-        if(a.length == 0)
+    function cola(a, index, result, anterior) {
+        if(index >= a.length)
             return result;
         else{
-
+            result.push(subLista(index, anterior)); //Las sublistas de cantidad index*/
+            anterior = result[result.length - 1].length == 0 ? [[]] : result[result.length - 1];
+            return cola(a, index + 1, result, anterior);
         }
     }
-}*/
 
+    function subLista(index, anterior){
+        return a.reduce( (z, x) => z.concat(grupos(x, index, anterior)),[]);
+    }
+
+    function grupos(x, index, anterior){
+        return anterior.filter( f => allowed(x, f, index)).map( e => e.concat(x));
+    }
+
+    function allowed(x, e, index){
+        if(e.length < index){
+            if(!e.length)
+                return true;
+            else if(x > e[e.length - 1])
+                return true;
+        }
+        return false;
+    }
+
+    return cola(a, 0, [], []);
+
+}
+
+console.log(sc([6, 1, 4, 8]));
 //Ejerccio 2.10
 
 function mapAlt(list, f1, f2){
