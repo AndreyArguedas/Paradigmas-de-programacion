@@ -424,6 +424,37 @@ function sc(a){
 }
 
 console.log(sc([6, 1, 4, 8]));
+
+//Ejercicio 2.8
+
+function segrec(a) {
+
+    function cola(a, curr, res){
+        if(!a.length){
+            return curr.lenght == 0 ? curr : res.concat([curr]);
+        } 
+        if(allowed(a[0], curr))
+            return cola(a.slice(1, a.length), curr.concat(a[0]), res);
+        else{
+            
+            res.push(curr);
+            return cola(a.slice(1, a.length), [a[0]], res);
+        }
+            
+    }
+
+    function allowed(a, curr){
+        if(curr.length == 0)
+            return true;
+        if(a > curr[curr.length - 1])
+            return true;
+        return false;
+    }
+
+    return cola(a, [], [])
+}
+
+console.log(segrec([1,3,5,2,9,0,6]));
 //Ejerccio 2.10
 
 function mapAlt(list, f1, f2){
@@ -449,6 +480,29 @@ function luhm(card) {
 }
 
 console.log(luhm([1, 2, 3, 4, 5, 6, 7]));
+
+//Ejercicio 2.12
+
+function multiplicar(b, lista){
+    function cola(b, lista, result, acarreo){
+        if(!lista.length){
+            acarreo > 0 ? result.unshift(acarreo) : result;
+            return result;
+        } 
+        else{
+            let operacion = lista.pop() * b + acarreo;
+            acarreo =  operacion >= 10 ? Math.floor(operacion / 10) : 0;
+            operacion = operacion >= 10 ? operacion % 10 : operacion;
+            result.unshift(operacion);
+            return cola(b, lista, result, acarreo);
+        }   
+    }
+
+    return cola(b, lista, [], 0);
+}
+
+console.log(multiplicar(3, [9, 8, 4]));
+console.log(multiplicar(5, [6, 4, 1, 9, 9, 9]));
 
 //Ejercicio 2.14
 
