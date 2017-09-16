@@ -1,35 +1,29 @@
 function subArrays(s){
 
-    function cola(s, result, i, last){
+    function cola(s, result, i){
         if(i == s.length)
             return result
         else{
             if(!i)
-                result.push(last)
-            else{
-                console.log("El last es:",last);
-                last = result.reduce( (z, x) => z.concat(subArray(x, i)), result);
-                result = last
-                console.log(result);
-                console.log("El nuevo last es:", last);
-            }
-            return cola(s, result, i + 1, last)
+                result.push([])
+            else
+                result = result.reduce( (z, x) => z.concat(subArray(x, i)), result);
+            return cola(s, result, i + 1)
         }
     }
 
     function subArray(x, i){
-        return s.reduce( (z, e) => {if(allowed(e, x, i)) z.push([e]); return z;}, []);
+        return s.reduce( (z, e) => {if(allowed(e, x, i)){z.push(x.concat(e))} return z}, [])
     }
 
     function allowed(e, x, i){
-        if(x.length <= i && !x.includes(e)){
-            console.log("ac",e,"en",i,"con last = ",x)
+        if(x.length + 1 == i && !x.includes(e))
             return true
-        }   
         return false
     }
-
-    return cola(s, [], 0, [])
+    
+    return cola(s, [], 0) //Falta filtrar para que no salgan los que son iguales ej [2,1] = [1,2]
 }
 
 console.log(subArrays([2, 1, 1]))
+console.log(subArrays([89, 7, 74, 65]))
