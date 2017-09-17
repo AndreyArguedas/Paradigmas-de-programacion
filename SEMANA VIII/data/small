@@ -1,0 +1,19 @@
+
+function wait(ms, name){
+	if (name)
+	   console.log('>>> Starts: ' + name);
+	const start_ms = Date.now();
+	for(; Date.now() - start_ms < ms; ); // Don´t do this!!!
+	if(name)
+	   console.log('>>> Ends:   ' + name);
+	
+}
+function schedule(f, ms=150){
+	let timer = setTimeout(f, ms);
+	return timer;
+	
+}
+module.exports ={
+	wait,
+	schedule
+}

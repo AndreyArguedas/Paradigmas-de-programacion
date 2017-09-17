@@ -425,6 +425,42 @@ function sc(a){
 
 console.log(sc([6, 1, 4, 8]));
 
+/* chen version */
+
+Array.prototype.first = function() {
+    return this[0];
+}
+Array.prototype.last = function() {
+    return (this.length === 0) ? -Infinity
+                               : this[this.length - 1];
+}
+
+let sc = (l) => {
+    let fillOne = (l, act, total) => {
+        console.log(`   --- list: ${l} - act: ${act} - total: ${total}`)
+        if(l.length === 0)      return total;
+        if(l.first() > act.last()) {
+            act = act.concat(l.first());
+            total = total.concat([act]);
+        }
+        return fillOne(l.slice(1), act, total);
+    }
+    let fillAll = (l, total) => {
+        if(l.length === 0)  return total.concat([[]]);
+        console.log(`Filling ${l.first()}`)
+        total = total.concat(fillOne(l, [l.first()], [[l.first()]] ));
+        return fillAll(l.slice(1), total);
+    }
+    return fillAll(l, []);
+}
+
+
+let test = () => {
+    console.log(sc([6,1,4,8]));
+}
+
+test();
+
 //Ejercicio 2.8
 
 function segrec(a) {
