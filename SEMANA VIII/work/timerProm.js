@@ -15,10 +15,10 @@ function test(p1, p2, p3, p4){
 	   setTimeout(()=> console.log('sto 2 ' + 999), 0)
 	
 	if (p3) 
-		setImmediate(()=> console.log('simm 3 ' + 888))
+		setImmediate(()=> console.log('simm 3 ' + 888)) //Muy lento
 	
 	if (p4)
-		process.nextTick(()=> console.log('nt 4 ' + 777))
+		process.nextTick(()=> console.log('nt 4 ' + 777)) //Next thick es mas rapido
 	
 }
 
