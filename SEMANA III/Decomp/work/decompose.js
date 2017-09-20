@@ -7,12 +7,21 @@
   
 */
 function decompose(n){
-	return fun_decompose(n, 0, n - 1); 
+  let iterator = gen(n, 0, n - 1); //n, s, d
+	return fun_decompose(iterator); 
 }
 
-function fun_decompose(n,s,d){
-	let dec = (n, s, d) => { return ( (d % 2) ) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1) };
-	return dec(n, s, d);
+function fun_decompose(iterator){
+  let iteration = iterator.next()
+  return iteration.value.d % 2 ? iteration.value : fun_decompose(iterator)
+
+	//let dec = (n, s, d) => { return ( (d % 2) ) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1) };
+	//return dec(n, s, d);
+}
+
+function* gen(n, s ,d){
+  while(d % 2 == 0)
+    yield {s : ++s, d : d>>= 1}
 }
 
 
