@@ -15,6 +15,7 @@ function runGen(generator) {
 	function handleValue(newValue){ // newValue = {value : _, done:_ }
 	  console.log("Estoy haciendo handle value");
 	  let {value, done} = newValue;
+	  console.log("VALUE ES", value)
 	  return  done  ? value
 	                : Promise.resolve(value)
 					         .then(value => Promise.resolve(it.next(value)))
