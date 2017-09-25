@@ -14,9 +14,6 @@ function decompose(n){
 function fun_decompose(iterator){
   let iteration = iterator.next()
   return iteration.value.d % 2 ? iteration.value : fun_decompose(iterator)
-
-	//let dec = (n, s, d) => { return ( (d % 2) ) ? {s:s, d:d} : fun_decompose(n, ++s, d>>=1) };
-	//return dec(n, s, d);
 }
 
 function* gen(n, s ,d){

@@ -11,5 +11,5 @@ console.log(foo2, obj); //Foo2 da indefinido por la falta de new arriba
 
 var updater = Foo.bind(obj); //Si la llaman actualiza obj
 updater(99);
-console.log(obj);
-console.log(updater);
+console.log(obj); // {x : 99}
+console.log(updater);//[Function: bound Foo]

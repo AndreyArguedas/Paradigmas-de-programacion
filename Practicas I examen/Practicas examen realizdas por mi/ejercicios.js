@@ -385,7 +385,6 @@ function flatten(a){
     return flat(a, []);
 }
 
-
 console.log(flatten([[[1, [2]], [[]], [[[3]]],4]]));
 
 //Ejercicio 2.7

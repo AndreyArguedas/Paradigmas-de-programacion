@@ -12,6 +12,7 @@ function main(){
 	const z = () => 200;
 
 	function f(){
+		console.log("FF")
 		let y = 0;
 		return this.y * 10;
 	}

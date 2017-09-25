@@ -34,14 +34,19 @@ class PPromise extends Promise {
 		                            .find(it => it))	                            
 	}
 	thenAll(...funs){
-		let finalValue = funs[0].reduce( (z, x) =>  x(z), 6); 
-		return Promise.resolve(finalValue);
+		console.log(this) //this = La promesa con 6
+		console.log(funs)
+		return funs[0].reduce( (z, x) => {return Promise.resolve(this).then(res => x(res))},this)
+		//funs[0].reduce( (z, x) =>  x(z), 6); 
+		//return Promise.resolve(finalValue);
 	}
 }
 
 function test(){
 	PPromise.from(6).thenAll([x => x * x, x => x + 10]).then(x => console.log(x))
 }
+
+test()
 
 module.exports = {
 	PPromise

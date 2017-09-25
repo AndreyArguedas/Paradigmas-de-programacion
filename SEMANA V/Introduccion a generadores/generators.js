@@ -27,7 +27,7 @@ function * anotherGenerator() {
 
 let iterator = composeGenerator();
 
-console.log(iterator.next());
+console.log(iterator.next()); 
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
