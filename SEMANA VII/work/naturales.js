@@ -10,9 +10,15 @@ let ZERO = s => z => z;
 
 let SUCC = g => s => z => s(g(s)(z));
 
+let PLUS = (m) => (n) => ((m (SUCC))(n))
+
+let MULT = m => n => y => (m (n)(y)) //NOT WORKING YET
+
 let ONE = SUCC(ZERO);
 let TWO = SUCC(ONE);
 let NATS = [ZERO, SUCC(ZERO), SUCC(SUCC(ZERO)), SUCC(SUCC(SUCC(ZERO)))];
+let SUMS = [PLUS(ZERO, ONE), PLUS(ONE, ONE)];
+let MULTS = [MULT(ONE, TWO, ONE), MULT(TWO, ONE, ONE), MULT(TWO, TWO, TWO)] //NOT WORKING YET
 
 // Tools para convertir numeros de Church a numeros visibles
 
@@ -31,10 +37,15 @@ function seePacked(nat){
 
 function test1(){
   NATS.forEach(n => log(see(n) + " = " + seePacked(n)));
-}  
+}
 
+function test2(){
+	SUMS.forEach( n => log(see(n) + " = " + seePacked(n)))
+}
 
-let PLUS = (m) => (n) => ((m (SUCC))(n))
+function test3(){
+	MULTS.forEach( n => log(see(n) + " = " + seePacked(n)))
+}
 
 module.exports = {
 	ZERO : ZERO,
@@ -42,9 +53,12 @@ module.exports = {
 	TWO : TWO,
 	SUCC : SUCC,
 	PLUS : PLUS,
+	MULT : MULT,
 	NATS : NATS,
 	log : log,
-	test1 : test1
+	test1 : test1,
+	test2 : test2,
+	test3 : test3
 }
 
 
