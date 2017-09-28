@@ -1,18 +1,5 @@
 /* Generealizar la pregunta 3 para n generadoras */
 
-/*function* union(f,g){ //Version del examen
-    for(;;){
-        [fret, gret] = [f.next(), g.next()]
-        if(fret.done && gret.done)
-            return
-        if(!fret.done)
-            yield fret.value
-        if(!gret.done)
-            yield gret.value
-    }
-    return
-}*/
-
 function* union(gens) {
     for (; ;) {
         let currents = gens.reduce((z, x) => z.concat(x.next()), [])
