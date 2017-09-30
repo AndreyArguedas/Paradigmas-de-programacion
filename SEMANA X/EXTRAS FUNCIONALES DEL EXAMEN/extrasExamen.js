@@ -3,7 +3,7 @@
 function* union(gens) {
     for (; ;) {
         let currents = gens.reduce((z, x) => z.concat(x.next()), [])
-                           .filter(x => !x.done)
+                           .filter(x => !x.done) //Se filtran todos los que no estan acabados
         if (!currents.length) //Todos se acabaron
             return
         while (currents.length)
