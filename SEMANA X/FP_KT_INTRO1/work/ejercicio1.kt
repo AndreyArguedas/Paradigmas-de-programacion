@@ -10,11 +10,11 @@ fun printOnlyNumbers(args: Array<String>){
 }
 
 fun selectOnlyNums(args: Array<String>) : List<Int> {
-    return args.map{ it.toIntOrNull() }.filter{it != null}
+    return args.map{ it.toInt?:0 }.filter{it is Int}
 }
 
 fun maxMinOfList(nums: List<Int>): List<Int>{
-    return listOf(nums.min(), nums.max()) //WHY?
+    return listOf(nums.min(), nums.max())
 }
 
 fun main(args: Array<String>){
