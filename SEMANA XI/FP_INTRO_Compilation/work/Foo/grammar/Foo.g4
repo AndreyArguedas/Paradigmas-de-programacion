@@ -7,18 +7,28 @@ grammar Foo;
 // P PARSER RULES (PRODUCTIONS)
 a : b+      // ParserRule 
 ;
-b : d | t
+b : d | t | f
 ;
 
 d: NUMBER
 ;
+
 t: TRUE
 ;
+
+f: FALSE
+;
+
 // LEXER (TOKENIZER)
 NUMBER : ('-')? [0-9]+ ('.' [0-9]+)? 
 ;
+
 TRUE : 'true'
 ;
+
+FALSE : 'false'
+;
+
 WS  :   [ \t\r\n]+ -> skip
 ;
 

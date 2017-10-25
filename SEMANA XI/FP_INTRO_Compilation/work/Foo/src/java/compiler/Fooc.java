@@ -37,7 +37,7 @@ public class Fooc {
 		   System.out.println("Fooc Reading from console (enter CTRL-Z+ENTER to finish");
 		}
 		 // Setup Lexer/Parser
-        ANTLRInputStream input = new ANTLRInputStream(is);
+        CharStream input = CharStreams.fromStream(is);
         FooLexer lexer = new FooLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         FooParser parser = new FooParser(tokens);

@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import java.io.*;
 
+
 const val VERSION = "FooBitc v0.0 CR EIF400.II-2017.kotlin"
 
 fun main(args : Array<String>){
@@ -34,7 +35,7 @@ fun main(args : Array<String>){
 	   System.err.println("Fooc Reading from console (enter CTRL-Z+ENTER to finish");
 	}
 	 // Setup Lexer/Parser
-	val input = ANTLRInputStream(inStream);
+	val input = CharStreams.fromStream(inStream);
 	val lexer = FooLexer(input);
 	val tokens = CommonTokenStream(lexer);
 	val parser = FooParser(tokens);

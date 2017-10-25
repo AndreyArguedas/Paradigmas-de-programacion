@@ -64,6 +64,11 @@ public class Compiler extends FooBaseVisitor<FooAst> implements FooEmiter{
    public FooAst visitT(FooParser.TContext ctx){
       return TRUE;
    }
+
+   @Override
+   public FooAst visitF(FooParser.FContext ctx){
+      return FALSE;
+   }
    
    
 }
