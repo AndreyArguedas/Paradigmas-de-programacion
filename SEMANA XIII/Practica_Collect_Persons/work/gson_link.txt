@@ -1,0 +1,1 @@
+http://search.maven.org/#artifactdetails%7Ccom.google.code.gson%7Cgson%7C2.8.2%7C
