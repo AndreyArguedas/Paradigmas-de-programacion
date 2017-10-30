@@ -108,3 +108,87 @@ class Var( name: String ):  Atomic(name.toUpperCase()) {
 	  return Var(this.name);
 	}
 }
+
+class Atom(name: String): Atomic(name.toLowerCase()){
+
+	override fun replace(){
+	  return this
+	}
+
+	override fun clone(){
+	  return new Atom(this.name);
+	}
+}
+
+/*class App (fun, args)extends Term {
+	constructor(fun, arg){
+		super()
+		this.fun = fun; this.arg =arg
+	}
+	toString(){
+		return `(${this.fun} ${this.arg})`
+	}
+	args(){
+	  return [this.fun, this.arg];
+	}
+	clone(){
+	  return new App(this.fun.clone(), this.arg.clone())
+	}
+	replace(opt){
+	  return new App(this.fun.replace(opt), this.arg.replace(opt))
+	}
+	
+}
+
+class Lambda extends Term {
+     constructor(arg, body){
+		super()
+		this.arg = arg; this.body = body; 
+	}
+	toString(){
+		return `(\\${this.arg}.${this.body})`
+	}
+	args(){
+	  return [this.arg, this.body];
+	}
+	replace({what, by, except}){
+	   return this.arg.equals(what) ? this
+	          : new Lambda(this.arg, 
+	                       this.body.replace({what, by, except: [this.arg].concat(except)}));
+	}
+	clone(){
+	  return new Lambda(this.arg.clone(), this.body.clone())
+	}
+}
+class ReplaceOpts {
+  constructor({what, by, except=[]}){
+    this.what = what;
+	this.by = by;
+	this.except = except;
+  }
+  toString(){
+     return `{what:${this.what},  by:${this.by} , except: ${this.except}}`;
+  }
+}
+class ReduceOpts {
+   constructor({level=10, strat=LAZY}){
+     this.level = level;
+	 this.strat = strat
+   }
+   toString(){
+     return `{level:${this.level}}}`;
+   }
+   dec(){
+     this.level--;
+	 return this;
+  }
+}
+function* varGen(pre = 'X_'){
+	 for (let n = 0, s=false; !s; n++) 
+	       s = yield new Var(pre + n);
+}
+const gen = varGen()
+
+function newVar(){
+	return gen.next().value; 
+}*/

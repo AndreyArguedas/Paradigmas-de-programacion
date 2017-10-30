@@ -10,21 +10,21 @@ data class TestLine( val name:String,
 fun test(){
     println()
     println(">>> Testing Lambda Calculus (LC) <<<")
-	/*
-	val X = new Var("X");  // X
-	val Y = new Var("Y");  // Y
-	val Z = new Var("Z");  // Z
-	val A = new App(X, Y)  // XY
-    val F = new Lambda(Y, A); // \Y.XY
-    val G = new Lambda(X, F); // \X.\Y.XY
-    val a = new Atom("a"); // a
-	val b = new Atom("b"); // b
-    val W = new App(G, a); // (\X.\Y.XY)a
-	val T = new App(W, b); // (\X.\Y.XY)a b
+	
+	val X =  Var("X");  // X
+	val Y =  Var("Y");  // Y
+	val Z =  Var("Z");  // Z
+	val A =  App(X, Y)  // XY
+    val F =  Lambda(Y, A); // \Y.XY
+    val G =  Lambda(X, F); // \X.\Y.XY
+    val a =  Atom("a"); // a
+	val b =  Atom("b"); // b
+    val W =  App(G, a); // (\X.\Y.XY)a
+	val T =  App(W, b); // (\X.\Y.XY)a b
 	val TC = T.clone(); // (\X.\Y.XY)a b*/
 
     println()	
-	val T = Var("X")
+	//val T = Var("X")
 	for ((label, term, method, args, opts) in 
 	                   listOf<TestLine>(
 					    TestLine("toString of T", T, "toString", arrayOf(), arrayOf()),

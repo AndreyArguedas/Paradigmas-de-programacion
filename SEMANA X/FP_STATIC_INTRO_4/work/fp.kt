@@ -2,7 +2,10 @@ package eif400.part04
 
 
 fun stats(numbers: List<Int>): Pair<Int, Pair<Int, Double>>{
-     return Pair(-1, Pair(-1, -1.0)) // -1 means not implemented yet
+     val max = numbers.fold(numbers.get(1), {acum, (acum, next) -> if(acum < next) next else acum})
+	 val min = numbers.fold(numbers.get(1), {acum, (acum, next) -> if(acum > next) next else acum})
+	 val avg = numbers.fold(0, {acum, next -> acum + next}) / numbers.size()
+	 return Pair(max, Pair(min, avg))
 	
 }
 fun summation(numbers: List<Int>): Int {

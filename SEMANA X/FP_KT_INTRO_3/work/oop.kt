@@ -22,10 +22,37 @@ enum class Color {
 /*
   Simple Rectangle
 */
-class Rectangle( val height: Double, val width:Double ) : Shape2D {
+open class Rectangle( val height: Double = 0.0, val width:Double = 0.0 ) : Shape2D {
     override val area
 	   get()= height * width
-	var color: Color = Color.WHITE
+	open var color: Color = Color.WHITE
+	   set(value){
+	      field = value
+	   }
+
+}
+
+/* Simple Triangle */
+
+class Triangle( val height: Double, val base:Double ) : Shape2D {
+    override val area 
+    get()= height * base / 2
+
+	  var color: Color = Color.WHITE
+	   set(value){
+	      field = value
+	   }
+
+}
+
+/* Simple square */
+
+class Square( val side: Double) : Rectangle() {
+    override val area 
+    get()= side * side
+
+	  override var color: Color = Color.WHITE
+
 	   set(value){
 	      field = value
 	   }
@@ -37,10 +64,11 @@ class Rectangle( val height: Double, val width:Double ) : Shape2D {
   devuelve la altura (h) y base (b) del trinagulo que se proyecta
 */
 const val PI_180 = Math.PI/180.0
-fun proyect(rect: Rectangle, alphaInGrads:Double = 45.0): Pair<Double, Double>{
+
+fun Rectangle.proyect(alphaInGrads:Double = 45.0): Pair<Double, Double>{
    val alpha = alphaInGrads * PI_180
-   val h = Math.cos(alpha) * rect.height
-   val b = Math.sin(alpha) * rect.height
+   val h = Math.cos(alpha) * this.height
+   val b = Math.sin(alpha) * this.height
    return Pair(b, h)
 }
 /*
@@ -60,9 +88,20 @@ fun main(args: Array<String>){
    rect.color = Color.BLUE;
    println("rect new color=${rect.color}")
    val alpha = 60.0;
-   val (base, height) = proyect(rect, alpha)
+   val (base, height) = rect.proyect(alpha)
    println("rect proyects to ${round(base)} X ${round(height)} after $alpha degrees")
-   
+   println("Let's do a triangle")
+   val tr = Triangle(5.0, 10.0)
+   println("triangle area = ${tr.area} color=${tr.color}")
+   tr.color = Color.BLUE;
+   println("triangle new color=${tr.color}")
+
+   println("Let's do a square")
+   val sqr = Square(5.0)
+   println("square area = ${sqr.area} color=${sqr.color}")
+   sqr.color = Color.RED;
+   println("square new color=${sqr.color}")
+
    // object expression demo
    val obj = object {
         var x: Int = 666

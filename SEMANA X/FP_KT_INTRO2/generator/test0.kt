@@ -13,5 +13,5 @@ fun main(args: Array<String>) {
     // yielding an infinite sequence
     yieldAll(generateSequence(8) { it * 3 })
     }
-    println(sequence.take(7).toList()) // [0, 1, 3, 5, 8, 24, 72]
+    println(sequence.take(15).toList()) // [0, 1, 3, 5, 8, 24, 72]
 }
