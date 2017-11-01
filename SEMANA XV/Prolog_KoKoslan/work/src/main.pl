@@ -23,6 +23,17 @@ case('mult.kl',
    )
 ).
 
+case('cases_lambda_apply.kl',
+     prog(
+     [
+        let(id(y), num(666)),
+		let(id(f), lambda(x, x -> id(y))),
+        let(id(g), lambda(x, x + id(y)))
+     ], 
+	 call(id(f), id(g))
+   )
+).
+
 get_test_case(File, Filename, SourceAst) :-
    outDir(OutDir),
    case(File, SourceAst),

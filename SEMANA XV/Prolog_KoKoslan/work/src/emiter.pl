@@ -24,6 +24,13 @@ emit(let(X, V)) :-
 				   nl
 .
 
+emit(lambda(P, E)) :-
+				   write('\\'),
+				   write(P),
+				   write('.'),
+				   write(E),
+				   nl				   
+
 emit(biOper(Oper, L, R)) :- forall(member(E, [L, Oper, R]), emit(E))
 .
 
