@@ -23,8 +23,10 @@ class Path{
 
 }
 
-class Graph(id : String, dat : String, edges : MutableList<Edge>, nodes : MutableList<Node>) : Store(id, dat) {
+class Graph(id : String, dat : String, var edges : MutableList<Edge>, var nodes : MutableList<Node>) : Store(id, dat) {
 	
+    //edges = MutableList<Edge>()
+
 	fun addNode(n : Node){ nodes.add(n) }
 
 	fun addEdge(e : Edge){ edges.add(e) }

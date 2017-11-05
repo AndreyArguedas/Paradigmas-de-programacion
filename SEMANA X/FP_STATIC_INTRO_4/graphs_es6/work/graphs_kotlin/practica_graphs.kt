@@ -1,30 +1,30 @@
-package eif400.graphs
+package eif400.test
 
 import eif400.graph.*
 
 fun main() {
-	println('\n>>> Practice 2017 Graphs starts running <<<\n');
+	println("\n>>> Practice 2017 Graphs starts running <<<\n");
 
 	// Test Graph_1
-	var g = Graph("graph_1");
+	var g = Graph("graph_1")
 	
 	// Just show empty graph
 
 	println("1.1) Empty Graph: ${g.toString()}")
 	
-	var nodes = ["a", "b", "c", "d", "e", "f", "g", "h"].map(x => new Node(x))
+	var nodes = listOf("a", "b", "c", "d", "e", "f", "g", "h").map{Node(it)}
 
-	var [na, nb, nc, nd, ne, nf, ng, nh] = nodes;
+	var (na, nb, nc, nd, ne, nf, ng, nh) = nodes;
 
-	var  edges = [new Edge("ab", na, nb),
-				  new Edge("ba", nb, na),
-				  new Edge("bd", nb, nd),
-				  new Edge("bc", nb, nc),
-				  new Edge("ce", nc, ne),
-				  new Edge("fa", nf, na),
-				  new Edge("fb", nf, nb),
-				  new Edge("hg", nh, ng)
-				  ]
+	var  edges = ListOf(Edge("ab", na, nb),
+				   Edge("ba", nb, na),
+				   Edge("bd", nb, nd),
+				   Edge("bc", nb, nc),
+				   Edge("ce", nc, ne),
+				   Edge("fa", nf, na),
+				   Edge("fb", nf, nb),
+				   Edge("hg", nh, ng)
+                )
 
 	// Init nodes and edges in graph
 	nodes.forEach{g.addNode(it)}
