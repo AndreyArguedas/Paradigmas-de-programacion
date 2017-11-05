@@ -13,24 +13,24 @@ case('simple.kl',
 	 biOper(oper('+'), id(x), id(y))
    )
 ).
+
 case('mult.kl',
      prog(
      [
         let(id(x), num(666)),
 		let(id(y), id(x))
      ], 
-	 biOper(oper('+'),biOper(oper('*'), id(x), id(y)),id(x))
+	 biOper(oper('+'), biOper(oper('*'), id(x), id(y)), id(x))
    )
 ).
 
-case('cases_lambda_apply.kl',
+case('cases_closure.kl',
      prog(
      [
         let(id(y), num(666)),
-		let(id(f), lambda(x, x -> id(y))),
-        let(id(g), lambda(x, x + id(y)))
+		let(id(f), lambda(id(x),biOper(oper('+'), id(x), id(y))))
      ], 
-	 call(id(f), id(g))
+	 call(id(f), num(555))
    )
 ).
 

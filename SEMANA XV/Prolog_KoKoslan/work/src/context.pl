@@ -55,5 +55,5 @@ context_find(This, Key, Val) :-
 .
 context_find(This, Key, _) :-	
      swritef(Msg, '*** Key ~q not found in context ~q***', [Key, This]),
-     throw(exceptio(Msg))
+     throw(exception(Msg))
 .	 
