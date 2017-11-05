@@ -2,7 +2,7 @@ package eif400.test
 
 import eif400.graph.*
 
-fun main() {
+fun main(args : Array<String>) {
 	println("\n>>> Practice 2017 Graphs starts running <<<\n");
 
 	// Test Graph_1
@@ -12,11 +12,20 @@ fun main() {
 
 	println("1.1) Empty Graph: ${g.toString()}")
 	
-	var nodes = listOf("a", "b", "c", "d", "e", "f", "g", "h").map{Node(it)}
+	var nodes = mutableListOf("a", "b", "c", "d", "e", "f", "g", "h").map{Node(it)}
 
-	var (na, nb, nc, nd, ne, nf, ng, nh) = nodes;
+	//var (na, nb, nc, nd, ne, nf, ng, nh) = nodes; NO ME SIRVIO DESTRUCUTRACION
 
-	var  edges = ListOf(Edge("ab", na, nb),
+	var na = nodes.get(0)
+	var nb = nodes.get(1)
+	var nc = nodes.get(2)
+	var nd = nodes.get(3)
+	var ne = nodes.get(4)
+	var nf = nodes.get(5)
+	var ng = nodes.get(6)
+	var nh = nodes.get(7)
+
+	var  edges = listOf(Edge("ab", na, nb),
 				   Edge("ba", nb, na),
 				   Edge("bd", nb, nd),
 				   Edge("bc", nb, nc),
@@ -34,13 +43,13 @@ fun main() {
 	println("1.2) Built Graph: ${g.toString()}")
     println()
 	
-	println("2.0) Graph=${g.id} : Successors of node ${a} = ${g.successors('a')}")
+	println("2.0) Graph=${g.id} : Successors of node a = ${g.successors("a")}")
 	
 	// Graph is iterable
 	println();
 	println("2.1) Graph=${g.id} : Edges in graph =")
 
-	for (edge in g){
+	for (edge in g.edges){
 		println(edge.toString())
 	}
 	// Compute degrees
@@ -50,7 +59,7 @@ fun main() {
 	// Build a path = {n1: dfs1, ..., nk: dfsk} where ni is a node i and dfsi its dfs-number
 	// The path is alpahtecally numbered
 	println();
-	println("2.3) Graph= ${g.id} : An alphabetic dfs = ${g.dfs().path}")
+	println("2.3) Graph= ${g.id} : An alphabetic dfs = ${g.dfs()}")
 	
 	// Calculate connected components
 	println();

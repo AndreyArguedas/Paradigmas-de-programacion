@@ -4,9 +4,9 @@ open class Store(id : String, dat : String = "")
     
 fun Store.inspect() : String{ return this.toString() }
 
-class Node(id : String, dat : String) : Store(id, dat)
+class Node(id : String) : Store(id, "")
 
-class Edge(id : String, left : Node, right : Node, dat: String) : Store(id, dat)
+class Edge(id : String, left : Node, right : Node) : Store(id, "")
 
 class Path{
     var visited = HashMap<String, Int>()
@@ -23,17 +23,21 @@ class Path{
 
 }
 
-class Graph(id : String, dat : String, var edges : MutableList<Edge>, var nodes : MutableList<Node>) : Store(id, dat) {
+data class Graph(var id : String) : Store(id, ""), Iterable<Edge> {
 	
-    //edges = MutableList<Edge>()
+     var edges : MutableList<Edge> = ArrayList()
+	 
+	 var nodes : MutableList<Node> =  ArrayList()
 
+	public abstract operator fun iterator(): Iterator<Edge>
+	
 	fun addNode(n : Node){ nodes.add(n) }
 
 	fun addEdge(e : Edge){ edges.add(e) }
 	
     fun successors(nodeId : String): String{ return "not implemented" }
 
-	override fun toString() : String{ return "not implemented" }
+	override fun next() : Edge{  }
 
 	fun dfs() : Path{ 
 		var path = Path()
