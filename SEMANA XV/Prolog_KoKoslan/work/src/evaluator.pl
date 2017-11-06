@@ -19,25 +19,35 @@ eval(let(X, V), CTX, VV) :-
    eval(V, CTX, VV),
    context_add(CTX, X, VV)
 .
+
+eval(lambda(X, Body), CTX, closure(X, Body, LambdaCTX)) :- 
+    context_new(LambdaCTX, CTX)
+.
+
+eval(call(F, Arg), CTX, Result) :-
+    eval(F, CTX, Closure),
+    eval(Arg, CTX, ValueOfArg),
+    beta_reduce(Closure, ValueOfArg, Result) 
+.
+
+
 eval(biOper(Oper, L, R), CTX, OV) :- 
    eval(L, CTX, LV),
    eval(R, CTX, RV),
-   writeln(LV),
-   writeln(RV),
    apply_oper(Oper, LV, RV, OV)
 .
 
-eval(call(H, A), CTX, CV) :-
-    eval(A, CTX, CV),
-    writeln(CV),
-    eval(H, CTX, HV),
-    writeln(HV)
-.
 
-eval(id(X), CTX, VX) :- writeln(id(X)), context_find(CTX, id(X), VX).
-eval(lambda(P, E), CTX, LV) :- writeln(lambda(P, E)), context_has_key(CTX, lambda(P, E)) -> context_find(CTX, lambda(P, E), LV) ; context_add(CTX, lambda(P, E), LV).
+
+eval(id(X), CTX, VX) :- context_find(CTX, id(X), VX).
 eval(num(N), _, N).
 
 apply_oper(oper('+'), L, R, V) :- V is L + R. 
 
-apply_oper(oper('*'), L, R, V) :- V is L * R. 
+apply_oper(oper('*'), L, R, V) :- V is L * R.
+
+beta_reduce(closure(X, Body, CTX), ValueOfArg, Result) :-
+    context_add(CTX,X,ValueOfArg),
+    eval(Body, CTX, Result)
+.
+

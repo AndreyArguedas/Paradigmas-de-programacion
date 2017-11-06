@@ -28,7 +28,7 @@ case('cases_closure.kl',
      prog(
      [
         let(id(y), num(666)),
-		let(id(f), lambda(id(x),biOper(oper('+'), id(x), id(y))))
+		let(id(f), lambda(id(x),biOper(oper('+'), id(y), id(y))))
      ], 
 	 call(id(f), num(555))
    )
