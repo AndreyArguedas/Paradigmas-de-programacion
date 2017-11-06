@@ -44,8 +44,8 @@ public class ReadPersons {
 	    
 		String filename = "data/persons.json";
 		List<ReadPersons.Person> persons = ReadPersons.readJSON(filename);
-		persons.stream()
-		       .forEach(System.out::println);
+		/*persons.stream()
+		       .forEach(System.out::println);*/
 		
 		
    }
