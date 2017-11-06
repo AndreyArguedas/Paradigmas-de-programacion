@@ -3,21 +3,22 @@ package eif400.java;
 import java.util.*;
 import java.util.stream.*;
 import java.util.function.*;
+import java.util.function.Consumer;
 
 interface IntegerPredicate extends Predicate<Integer>{
 	
 }
 public class Types {
 	
-	public <T> ??? test1(List<T> list, ??? f){
-		??? id = x -> x;
+	public <T> Stream test1(List<T> list, Predicate f){
+		Function id = x -> x;
 		return list.stream()
 		           .map(id)
 		           .filter(f);
 		  
 	}
 	
-	public <T> void test2(List<T> list, ??? f){
+	public <T> void test2(List<T> list, Consumer f){
 		list.stream()
 		    .forEach(f);	  
 	}
@@ -33,7 +34,7 @@ public class Types {
 	
 	
 	public static void main(String[] args){
-		??? add1 = x -> x + 1;
+		Function<Integer, Integer> add1 = x -> x + 1;
 		test3(x -> true);
 	}
 	

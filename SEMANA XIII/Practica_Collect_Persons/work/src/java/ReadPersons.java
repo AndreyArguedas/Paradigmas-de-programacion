@@ -23,6 +23,10 @@ public class ReadPersons {
 		public String toString(){
 			return gson.toJson(this);
 		}
+
+		public String getLastAndVeryLast() {
+            return String.format("%s %s", last, veryLast);
+        }
     }
 	public static class Person {
 		public Name name;
@@ -31,6 +35,12 @@ public class ReadPersons {
 		public String toString(){
 			return gson.toJson(this);
 		}
+		 public int getAge() {
+        	return age;
+		}
+		public Name getName() {
+            return name;
+        }
 	}
    static public List<Person> readJSON(String filename){
 	   

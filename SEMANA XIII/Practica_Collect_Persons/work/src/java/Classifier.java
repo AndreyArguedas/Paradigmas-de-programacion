@@ -9,8 +9,14 @@ import java.util.stream.*;
 import java.io.*;
 import java.nio.file.*;
 import java.lang.reflect.*;
+import java.util.function.Function;
 
 public class Classifier {
+
+    public static <T, R> Map<String, List<R>> getGroupedBy(List<T> list, Function<T, R> toUniqueFunc, Function<R, String> groupFunc)  {
+        return list.stream().map(toUniqueFunc).collect(Collectors.groupingBy(groupFunc));
+    }
+
    public static void main(String[] args){
 	    
 		String filename = "data/persons.json";
@@ -21,17 +27,11 @@ public class Classifier {
         OptionalDouble avg = persons.stream().mapToInt(i -> i.age).average();
 		System.out.println(avg.getAsDouble());
 
-        Class c = ReadPersons.class;
-        Method[] m = c.getDeclaredMethods();
-        for (int i = 0; i < m.length; i++)
-            System.out.println(m[i].toString());
-
         System.out.println("Familias Distintas :");
-        /*Map<Int, Long> counting = persons.stream().collect(
-            Collectors.groupingBy(ReadPersons.Person.age, Collectors.counting())
-        );
-
-        System.out.println(counting);*/
+        Map < String, List < ReadPersons.Name >> families = Classifier.getGroupedBy(persons, ReadPersons.Person::getName, ReadPersons.Name::getLastAndVeryLast);
+        System.out.println(String.format("There are %d families\n", families.size()));
+        System.out.println("And these are their qty of members and last names: ");
+        families.forEach((familyName, names) -> System.out.println(String.format("    %d - %s", names.size(), familyName)));
 		
    }
 }
