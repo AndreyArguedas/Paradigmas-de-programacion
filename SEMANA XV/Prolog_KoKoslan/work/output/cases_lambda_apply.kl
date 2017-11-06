@@ -1,2 +1,7 @@
 let y = 666 
-let f = 
+let f = \x .x (y )
+
+
+let g = \x .x  + y 
+
+f (g )

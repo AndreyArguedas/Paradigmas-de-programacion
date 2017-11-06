@@ -34,6 +34,17 @@ case('cases_closure.kl',
    )
 ).
 
+case('cases_lambda_apply.kl',
+     prog(
+     [
+        let(id(y), num(666)),
+		let(id(f), lambda(id(x),call(id(x), id(y)))),
+        let(id(g), lambda(id(x),biOper(oper('+'), id(x), id(y))))
+     ], 
+	 call(id(f), id(g))
+   )
+).
+
 get_test_case(File, Filename, SourceAst) :-
    outDir(OutDir),
    case(File, SourceAst),
