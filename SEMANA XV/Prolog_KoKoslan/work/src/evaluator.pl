@@ -41,12 +41,16 @@ eval(biOper(Oper, L, R), CTX, OV) :-
 
 eval(id(X), CTX, VX) :- context_find(CTX, id(X), VX).
 eval(num(N), _, N).
+eval(listP(L), _,L).
 
 apply_oper(oper('+'), L, R, V) :- V is L + R. 
 
 apply_oper(oper('*'), L, R, V) :- V is L * R.
 
 beta_reduce(closure(X, Body, CTX), ValueOfArg, Result) :-
+    writeln(X),
+    writeln(Body),
+    writeln(ValueOfArg),
     context_add(CTX,X,ValueOfArg),
     eval(Body, CTX, Result)
 .

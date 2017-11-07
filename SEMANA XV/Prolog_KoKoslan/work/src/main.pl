@@ -45,6 +45,16 @@ case('cases_lambda_apply.kl',
    )
 ).
 
+case('cases_car_list_pat.kl',
+     prog(
+     [
+        let(id(list), listP([1, 2, 3])),
+		let(id(car), lambda(listP([x | r]), id(x)))
+     ], 
+	 call(id(car), id(list))
+   )
+).
+
 get_test_case(File, Filename, SourceAst) :-
    outDir(OutDir),
    case(File, SourceAst),

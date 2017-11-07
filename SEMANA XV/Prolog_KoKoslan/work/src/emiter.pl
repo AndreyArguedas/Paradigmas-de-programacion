@@ -32,6 +32,7 @@ emit(lambda(X, V)) :-
 				   nl
 .
 
+
 emit(call(X, V)) :- 
                    emit(X),
 				   write('('),
@@ -47,3 +48,4 @@ emit(biOper(Oper, L, R)) :- forall(member(E, [L, Oper, R]), emit(E))
 emit(id(X)) :- format('~s ', [X]).
 emit(num(N)) :- format('~d ', [N]).
 emit(oper(O)) :- format(' ~s ', [O]).
+emit(listP(L)) :- format('~w', [L]).
