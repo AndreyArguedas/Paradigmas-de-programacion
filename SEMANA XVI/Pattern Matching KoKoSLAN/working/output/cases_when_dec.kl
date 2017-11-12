@@ -1,0 +1,8 @@
+let y = 666
+let dec = \ x_3 . {
+    let case_2 = \ x_2 . \ case_1 . x_2 == 0 ? 0 : case_1 (x_2 )
+    let case_1 = \ x . \ else_1 . dec (x - 1)+ 1
+    let else_1 = \ x_1 . fail (x_1 )
+    (case_2 (x_3 ))(\ x_3 . (case_1 (x_3 ))(\ x_3 . else_1 (x_3 )))
+}
+dec (y )

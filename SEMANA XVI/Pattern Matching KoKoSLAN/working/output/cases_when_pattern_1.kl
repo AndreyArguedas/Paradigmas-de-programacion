@@ -1,0 +1,4 @@
+let f = \ x_3 . {let case_1 = \ x_2 . \ else_1 . x_2 == 0 ? true  : else_1 (x_2 )
+let else_1 = \ x_1 . fail (x_1 )
+(case_1 (x_3 ))(\ x_3 . else_1 (x_3 ))}
+f (0)
