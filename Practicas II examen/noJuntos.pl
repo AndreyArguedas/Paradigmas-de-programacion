@@ -1,11 +1,14 @@
-solve(0, 0).
-solve(N, S) :- solve_aux(N, 0, S).
-solve_aux(0, I, 0 + I).
-solve_aux(N, I, S) :- 
-                      N1 is N - 1,
-                      I1 is I + 1,
-                      solve_aux(N1, I1, S1),
-                      S = N1 + I1.
+noJuntos(L, X, Y) :- append([X, _ | _], [Y | _], L).
+
+solveList(N, L) :- findall(S, solve(N, S), L).
+
+solve(N, S) :- solve_aux(X, Y, N),
+               S = X + Y.
+
+solve_aux(X, Y, N) :- numlist(0, N, NL),
+                      member(X, NL),
+                      Y is N - X.
+
 
 
 foo(L, N) :- member(X, L), X = N, write(X), nl, fail.
